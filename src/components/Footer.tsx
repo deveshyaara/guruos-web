@@ -1,25 +1,10 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import React from "react";
 import { siteConfig } from "@/config/siteConfig";
 import { SparkIcon } from "./icons/SparkIcon";
-import { ArrowUp, ArrowUpRight, Terminal } from "lucide-react";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
 
-interface FooterProps {
-  onOpenInstallModal?: () => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
-  const [currentYear, setCurrentYear] = useState<number>(2026);
-
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+export const Footer: React.FC = () => {
+  const currentYear = 2026;
 
   return (
     <footer className="bg-[#0A0A0A] text-[#FFFFFF] border-t-2 border-[#0A0A0A]">
@@ -44,12 +29,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
                 {siteConfig.tagline}
               </p>
               <p className="font-mono text-xs sm:text-sm text-[#FFFFFF]/70 leading-relaxed max-w-sm">
-                A custom Linux desktop built around dynamic workspaces, a native GTK4 shell, and an integrated AI-assisted workflow.
+                {siteConfig.supportingStatement}
               </p>
             </div>
 
             <div className="inline-block p-2 border border-[#FFFFFF]/20 bg-[#141414] font-mono text-[11px] text-[#FFFFFF]/70">
-              ARCHITECTURE: x86_64 // BASE: ARCH LINUX // WM: HYPRLAND
+              {`ARCHITECTURE: ${siteConfig.architecture} // BASE: ARCH LINUX // WM: HYPRLAND`}
             </div>
           </div>
 
@@ -59,7 +44,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
             {/* Column 1: Explore */}
             <div className="space-y-4">
               <div className="font-bold uppercase text-[#FF5A1F] tracking-wider border-b border-[#FFFFFF]/20 pb-2">
-                EXPLORE
+                ARCHITECTURE
               </div>
               <ul className="space-y-2.5 text-[#FFFFFF]/80 uppercase">
                 <li>
@@ -68,8 +53,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
                   </a>
                 </li>
                 <li>
+                  <a href="#architecture" className="hover:text-[#FF5A1F] transition-colors">
+                    The 4 Layers
+                  </a>
+                </li>
+                <li>
                   <a href="#features" className="hover:text-[#FF5A1F] transition-colors">
-                    Features
+                    Core Shell
                   </a>
                 </li>
                 <li>
@@ -77,45 +67,34 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
                     Desktop HUD
                   </a>
                 </li>
-                <li>
-                  <a href="#specs" className="hover:text-[#FF5A1F] transition-colors">
-                    Specifications
-                  </a>
-                </li>
               </ul>
             </div>
 
-            {/* Column 2: Download */}
+            {/* Column 2: Status & Specs */}
             <div className="space-y-4">
               <div className="font-bold uppercase text-[#FF5A1F] tracking-wider border-b border-[#FFFFFF]/20 pb-2">
-                DOWNLOAD
+                TRANSPARENCY
               </div>
               <ul className="space-y-2.5 text-[#FFFFFF]/80 uppercase">
                 <li>
-                  <a href="#download" className="hover:text-[#FF5A1F] transition-colors">
-                    GuruOS ISO
-                  </a>
-                </li>
-                {siteConfig.release.releaseNotesUrl && (
-                  <li>
-                    <a
-                      href={siteConfig.release.releaseNotesUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-[#FF5A1F] flex items-center gap-1 transition-colors"
-                    >
-                      <span>Notes</span>
-                      <ArrowUpRight className="w-3 h-3 text-[#FF5A1F]" />
-                    </a>
-                  </li>
-                )}
-                <li>
-                  <a href="#download" className="hover:text-[#FF5A1F] transition-colors">
-                    Checksums
+                  <a href="#status" className="hover:text-[#FF5A1F] transition-colors">
+                    Dev Status
                   </a>
                 </li>
                 <li>
-                  <span className="text-[#FFFFFF]/40">GPG Keys (Pending)</span>
+                  <a href="#specs" className="hover:text-[#FF5A1F] transition-colors">
+                    System Specs
+                  </a>
+                </li>
+                <li>
+                  <a href="#download" className="hover:text-[#FF5A1F] transition-colors">
+                    Release State
+                  </a>
+                </li>
+                <li>
+                  <a href="#status" className="hover:text-[#FF5A1F] transition-colors">
+                    Build Pipeline
+                  </a>
                 </li>
               </ul>
             </div>
@@ -123,12 +102,17 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
             {/* Column 3: Documentation */}
             <div className="space-y-4">
               <div className="font-bold uppercase text-[#FF5A1F] tracking-wider border-b border-[#FFFFFF]/20 pb-2">
-                DOCUMENTATION
+                RESOURCES
               </div>
               <ul className="space-y-2.5 text-[#FFFFFF]/80 uppercase">
                 <li>
                   <a href="#installation" className="hover:text-[#FF5A1F] transition-colors">
                     Install Guide
+                  </a>
+                </li>
+                <li>
+                  <a href="#faq" className="hover:text-[#FF5A1F] transition-colors">
+                    FAQ
                   </a>
                 </li>
                 {siteConfig.documentationUrl ? (
@@ -145,14 +129,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
                   </li>
                 ) : (
                   <li>
-                    <span className="text-[#FFFFFF]/40">Manual (Draft)</span>
+                    <span className="text-[#FFFFFF]/40">Docs (In-App)</span>
                   </li>
                 )}
-                <li>
-                  <a href="#faq" className="hover:text-[#FF5A1F] transition-colors">
-                    FAQ
-                  </a>
-                </li>
                 <li>
                   <a
                     href="https://wiki.archlinux.org/"
@@ -170,10 +149,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
             {/* Column 4: Community */}
             <div className="space-y-4">
               <div className="font-bold uppercase text-[#FF5A1F] tracking-wider border-b border-[#FFFFFF]/20 pb-2">
-                COMMUNITY
+                PROJECT
               </div>
               <ul className="space-y-2.5 text-[#FFFFFF]/80 uppercase">
-                {siteConfig.githubRepoUrl && (
+                {siteConfig.githubRepoUrl ? (
                   <li>
                     <a
                       href={siteConfig.githubRepoUrl}
@@ -185,8 +164,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
                       <ArrowUpRight className="w-3 h-3 text-[#FF5A1F]" />
                     </a>
                   </li>
+                ) : (
+                  <li>
+                    <span className="text-[#FFFFFF]/40">GitHub (Pending)</span>
+                  </li>
                 )}
-                {siteConfig.discussionsUrl && (
+                {siteConfig.discussionsUrl ? (
                   <li>
                     <a
                       href={siteConfig.discussionsUrl}
@@ -198,24 +181,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
                       <ArrowUpRight className="w-3 h-3 text-[#FF5A1F]" />
                     </a>
                   </li>
-                )}
-                {siteConfig.communityDiscordUrl ? (
-                  <li>
-                    <a
-                      href={siteConfig.communityDiscordUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-[#FF5A1F] flex items-center gap-1 transition-colors"
-                    >
-                      <span>Discord</span>
-                      <ArrowUpRight className="w-3 h-3 text-[#FF5A1F]" />
-                    </a>
-                  </li>
                 ) : (
                   <li>
-                    <span className="text-[#FFFFFF]/40">Discord (Soon)</span>
+                    <span className="text-[#FFFFFF]/40">Forum (Pending)</span>
                   </li>
                 )}
+                <li>
+                  <a href="#download" className="hover:text-[#FF5A1F] transition-colors">
+                    Checksums
+                  </a>
+                </li>
+                <li>
+                  <span className="text-[#FFFFFF]/40">Open Source</span>
+                </li>
               </ul>
             </div>
 
@@ -232,25 +210,24 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInstallModal }) => {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-[#FF5A1F]" />
             <span className="font-bold text-[#FFFFFF]">
-              GURUOS / AN INDEPENDENT LINUX PROJECT
+              GURUOS / AN INDEPENDENT ARCH LINUX PROJECT
             </span>
             <span className="text-[#FFFFFF]/40">© {currentYear}</span>
           </div>
 
           <div className="flex items-center gap-4">
             <span className="text-[11px] text-[#FFFFFF]/50 hidden sm:inline">
-              DISTRIBUTION PROTOTYPE V0.1
+              DEV PREVIEW // {siteConfig.isoFileName}
             </span>
             
-            <button
-              type="button"
-              onClick={scrollToTop}
-              className="brutal-btn bg-[#181818] hover:bg-[#FF5A1F] hover:text-[#0A0A0A] text-[#FFFFFF] border border-[#FFFFFF]/30 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1"
+            <a
+              href="#"
+              className="brutal-btn bg-[#181818] hover:bg-[#FF5A1F] hover:text-[#0A0A0A] text-[#FFFFFF] border border-[#FFFFFF]/30 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer"
               aria-label="Back to top of page"
             >
               <span>BACK TO TOP</span>
               <ArrowUp className="w-3.5 h-3.5" />
-            </button>
+            </a>
           </div>
 
         </div>

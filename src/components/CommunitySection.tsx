@@ -1,16 +1,12 @@
-"use client";
-
 import React from "react";
 import { siteConfig } from "@/config/siteConfig";
-import { SparkIcon, StarburstSpark } from "./icons/SparkIcon";
-import { BrutalFlame } from "./icons/BrutalFlame";
+import { SparkIcon } from "./icons/SparkIcon";
 import { GithubIcon } from "./icons/GithubIcon";
+import { Button } from "./ui/Button";
 import { 
   BookOpen, 
   MessageSquare, 
   ArrowUpRight, 
-  Terminal, 
-  Code,
   Users
 } from "lucide-react";
 
@@ -30,7 +26,7 @@ export const CommunitySection: React.FC = () => {
             {/* Monospace Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase bg-[#FF5A1F] text-[#0A0A0A] px-3 py-1">
               <SparkIcon className="w-3.5 h-3.5" color="#0A0A0A" />
-              <span>SECTION 08 // COMMUNITY & SOURCE</span>
+              <span>SECTION 10 // COMMUNITY & SOURCE</span>
             </div>
 
             {/* Main Headline */}
@@ -47,33 +43,33 @@ export const CommunitySection: React.FC = () => {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
               {siteConfig.githubRepoUrl && (
-                <a
+                <Button
+                  variant="primary"
+                  size="md"
                   href={siteConfig.githubRepoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="brutal-btn bg-[#FF5A1F] hover:bg-[#FFFFFF] hover:text-[#0A0A0A] text-[#FFFFFF] border-2 border-[#FF5A1F] px-8 py-4 text-xs sm:text-sm font-black tracking-wider brutal-shadow-white"
+                  className="px-8 py-4"
                 >
                   <GithubIcon className="w-4 h-4 mr-2" />
                   <span>VIEW SOURCE ON GITHUB</span>
                   <ArrowUpRight className="w-4 h-4 ml-1.5" />
-                </a>
+                </Button>
               )}
 
               {siteConfig.documentationUrl && (
-                <a
+                <Button
+                  variant="dark"
+                  size="md"
                   href={siteConfig.documentationUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="brutal-btn bg-[#181818] hover:bg-[#FFFFFF] hover:text-[#0A0A0A] text-[#FFFFFF] border-2 border-[#FFFFFF]/40 px-6 py-4 text-xs sm:text-sm font-bold tracking-wider"
+                  className="border-[#FFFFFF]/40 py-4"
                 >
                   <BookOpen className="w-4 h-4 mr-2 text-[#FF5A1F]" />
                   <span>READ THE DOCUMENTATION</span>
                   <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#FF5A1F]" />
-                </a>
+                </Button>
               )}
             </div>
 
-            {/* Active Community Links (Explicitly configured only) */}
+            {/* Active Community Links */}
             <div className="pt-8 border-t border-[#FFFFFF]/15 flex flex-wrap items-center gap-6 font-mono text-xs text-[#FFFFFF]/70">
               {siteConfig.discussionsUrl && (
                 <a
@@ -105,7 +101,7 @@ export const CommunitySection: React.FC = () => {
               )}
 
               <span className="text-[#FFFFFF]/40 font-mono text-[11px]">
-                // LICENSED UNDER OPEN SOURCE PRINCIPLES
+                {"// LICENSED UNDER OPEN SOURCE PRINCIPLES"}
               </span>
             </div>
 

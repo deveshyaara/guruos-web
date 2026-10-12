@@ -1,18 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { SparkIcon } from "../icons/SparkIcon";
 import { siteConfig } from "@/config/siteConfig";
 import { 
   X, 
   AlertTriangle, 
   Terminal, 
-  HardDrive, 
-  Usb, 
   ExternalLink, 
   BookOpen,
-  CheckCircle2,
-  HelpCircle
+  CheckCircle2
 } from "lucide-react";
 
 interface FullInstallModalProps {
@@ -289,7 +285,7 @@ export const FullInstallModal: React.FC<FullInstallModalProps> = ({
         {/* Modal Footer */}
         <div className="mt-8 pt-4 border-t-2 border-[#0A0A0A] flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="font-mono text-[11px] text-[#0A0A0A]/60">
-            // DOCUMENTATION DRAFT: VALIDATED AGAINST ARCH 2026 ROADMAP
+            {"// DOCUMENTATION DRAFT: VALIDATED AGAINST ARCH 2026 ROADMAP"}
           </div>
           <button
             type="button"

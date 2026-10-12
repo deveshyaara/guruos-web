@@ -6,20 +6,18 @@ import { SparkIcon } from "./icons/SparkIcon";
 import { siteConfig } from "@/config/siteConfig";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
-interface NavbarProps {
-  onOpenInstallModal?: () => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = () => {
+export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Explore", href: "#explore" },
+    { label: "Overview", href: "#explore" },
+    { label: "Architecture", href: "#architecture" },
     { label: "Features", href: "#features" },
-    { label: "Showcase", href: "#showcase" },
+    { label: "Desktop HUD", href: "#showcase" },
     { label: "Download", href: "#download" },
-    { label: "Installation", href: "#installation" },
-    { label: "System Specs", href: "#specs" },
+    { label: "Status", href: "#status" },
+    { label: "Install", href: "#installation" },
+    { label: "Specs", href: "#specs" },
     { label: "FAQ", href: "#faq" },
   ];
 
@@ -47,12 +45,12 @@ export const Navbar: React.FC<NavbarProps> = () => {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 font-mono text-xs font-bold uppercase tracking-wider text-[#0A0A0A]">
+          <nav className="hidden xl:flex items-center gap-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#0A0A0A]">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="px-3 py-2 hover:bg-[#F5F3EF] hover:text-[#FF5A1F] transition-colors border-b-2 border-transparent hover:border-[#FF5A1F]"
+                className="px-2.5 py-1.5 hover:bg-[#F5F3EF] hover:text-[#FF5A1F] transition-colors border-b-2 border-transparent hover:border-[#FF5A1F]"
               >
                 {link.label}
               </a>
@@ -62,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                 href={siteConfig.documentationUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-2 flex items-center gap-0.5 hover:bg-[#F5F3EF] hover:text-[#FF5A1F] transition-colors"
+                className="px-2.5 py-1.5 flex items-center gap-0.5 hover:bg-[#F5F3EF] hover:text-[#FF5A1F] transition-colors"
               >
                 Docs
                 <ArrowUpRight className="w-3.5 h-3.5 text-[#FF5A1F]" />
@@ -74,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
           <div className="hidden sm:flex items-center gap-3">
             <a
               href="#download"
-              className="brutal-btn bg-[#FF5A1F] hover:bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] px-5 py-2.5 text-xs font-black tracking-wider brutal-shadow hover:text-[#FFFFFF]"
+              className="brutal-btn bg-[#FF5A1F] hover:bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] px-4 py-2 text-xs font-black tracking-wider brutal-shadow hover:text-[#FFFFFF]"
             >
               <span>GET GURUOS</span>
               <ArrowUpRight className="w-4 h-4 ml-1.5" />
@@ -82,11 +80,11 @@ export const Navbar: React.FC<NavbarProps> = () => {
           </div>
 
           {/* Mobile Menu Trigger */}
-          <div className="flex items-center sm:hidden">
+          <div className="flex items-center xl:hidden">
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 border-2 border-[#0A0A0A] bg-[#FFFFFF] hover:bg-[#F5F3EF] text-[#0A0A0A] focus:outline-none focus:ring-2 focus:ring-[#FF5A1F]"
+              className="p-2 border-2 border-[#0A0A0A] bg-[#FFFFFF] hover:bg-[#F5F3EF] text-[#0A0A0A] focus:outline-none focus:ring-2 focus:ring-[#FF5A1F] cursor-pointer"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle navigation menu"
             >
@@ -98,14 +96,14 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
       {/* Mobile Collapsible Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="sm:hidden border-t-2 border-[#0A0A0A] bg-[#FFFFFF] px-4 pt-3 pb-6 animate-fadeIn">
-          <div className="flex flex-col space-y-2 font-mono text-sm font-bold uppercase">
+        <div className="xl:hidden border-t-2 border-[#0A0A0A] bg-[#FFFFFF] px-4 pt-3 pb-6 animate-fadeIn">
+          <div className="flex flex-col space-y-2 font-mono text-xs font-bold uppercase">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 border-b border-[#0A0A0A]/10 hover:bg-[#F5F3EF] hover:text-[#FF5A1F] flex items-center justify-between"
+                className="px-3 py-2 border-b border-[#0A0A0A]/10 hover:bg-[#F5F3EF] hover:text-[#FF5A1F] flex items-center justify-between"
               >
                 <span>{link.label}</span>
                 <span className="text-xs text-[#FF5A1F]">→</span>
@@ -117,7 +115,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 border-b border-[#0A0A0A]/10 hover:bg-[#F5F3EF] flex items-center justify-between text-[#0A0A0A]"
+                className="px-3 py-2 border-b border-[#0A0A0A]/10 hover:bg-[#F5F3EF] flex items-center justify-between text-[#0A0A0A]"
               >
                 <span>Documentation</span>
                 <ArrowUpRight className="w-4 h-4 text-[#FF5A1F]" />

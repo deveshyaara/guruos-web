@@ -1,9 +1,9 @@
-"use client";
-
 import React from "react";
-import { SparkIcon, StarburstSpark } from "./icons/SparkIcon";
+import { SparkIcon } from "./icons/SparkIcon";
 import { GeometricFireSun } from "./icons/BrutalFlame";
-import { ArrowUpRight, ArrowDown, Terminal, Cpu, Layers } from "lucide-react";
+import { ArrowUpRight, ArrowDown, Terminal } from "lucide-react";
+import { siteConfig } from "@/config/siteConfig";
+import { Button } from "./ui/Button";
 
 export const HeroSection: React.FC = () => {
   return (
@@ -13,10 +13,10 @@ export const HeroSection: React.FC = () => {
 
       {/* Floating technical corner coordinates */}
       <div className="hidden xl:flex absolute top-4 left-6 font-mono text-[11px] text-[#0A0A0A]/40 tracking-widest uppercase">
-        // LAT: 52.5200° N / LON: 13.4050° E — SYS: X86_64
+        {"// LAT: 52.5200° N / LON: 13.4050° E — SYS: X86_64 // ARCH-BASED"}
       </div>
       <div className="hidden xl:flex absolute top-4 right-6 font-mono text-[11px] text-[#0A0A0A]/40 tracking-widest uppercase">
-        REV: PROTO_01 // STAMP: 2026_BUILD
+        {`REV: ${siteConfig.releaseVersion} // ARTIFACT: ${siteConfig.isoFileName}`}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -30,7 +30,7 @@ export const HeroSection: React.FC = () => {
               <SparkIcon className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "6s" }} color="#FF5A1F" />
               <span>INDEPENDENT LINUX PROJECT</span>
               <span className="text-[#FF5A1F] hidden sm:inline">/</span>
-              <span className="text-[#FF5A1F] hidden sm:inline">BUILT FOR THE CURIOUS</span>
+              <span className="text-[#FF5A1F] hidden sm:inline">ARCH-BASED DESKTOP</span>
             </div>
 
             {/* Main Headline */}
@@ -41,53 +41,56 @@ export const HeroSection: React.FC = () => {
 
             {/* Tagline & Supporting Copy */}
             <div className="space-y-4 max-w-xl">
-              <p className="font-mono text-sm sm:text-base font-bold text-[#FF5A1F] uppercase tracking-wide">
-                YOUR MACHINE. YOUR RULES. A DIFFERENT KIND OF LINUX.
+              <p className="font-mono text-sm sm:text-base font-black text-[#FF5A1F] uppercase tracking-wide">
+                {siteConfig.tagline}
               </p>
               <p className="text-lg sm:text-xl text-[#0A0A0A] leading-relaxed font-medium">
-                Meet <strong className="font-bold underline decoration-[#FF5A1F] decoration-2">GuruOS</strong>. A custom Linux desktop built for people who want to understand their system, shape their workflow, and explore what comes next.
+                {siteConfig.supportingStatement}
               </p>
             </div>
 
             {/* Brutalist Callouts Bar */}
             <div className="grid grid-cols-3 gap-2 py-2 max-w-lg font-mono text-[11px] sm:text-xs">
-              <div className="border border-[#0A0A0A] bg-[#F5F3EF] p-2 flex items-center gap-1.5 font-bold">
+              <div className="border-2 border-[#0A0A0A] bg-[#F5F3EF] p-2 flex items-center gap-1.5 font-bold">
                 <span className="w-2 h-2 bg-[#FF5A1F]" />
-                <span>ARCH CORE</span>
+                <span>ARCH LINUX</span>
               </div>
-              <div className="border border-[#0A0A0A] bg-[#F5F3EF] p-2 flex items-center gap-1.5 font-bold">
+              <div className="border-2 border-[#0A0A0A] bg-[#F5F3EF] p-2 flex items-center gap-1.5 font-bold">
                 <span className="w-2 h-2 bg-[#FF5A1F]" />
                 <span>HYPRLAND</span>
               </div>
-              <div className="border border-[#0A0A0A] bg-[#F5F3EF] p-2 flex items-center gap-1.5 font-bold">
+              <div className="border-2 border-[#0A0A0A] bg-[#F5F3EF] p-2 flex items-center gap-1.5 font-bold">
                 <span className="w-2 h-2 bg-[#FF5A1F]" />
-                <span>GTK4 SHELL</span>
+                <span>RUST GTK4</span>
               </div>
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-              <a
-                href="#explore"
-                className="brutal-btn bg-[#FF5A1F] hover:bg-[#0A0A0A] text-[#FFFFFF] border-3 border-[#0A0A0A] px-8 py-4 text-sm font-black tracking-widest brutal-shadow-lg"
+              <Button
+                variant="primary"
+                size="lg"
+                href="#architecture"
               >
-                <span>EXPLORE THE OS</span>
+                <span>EXPLORE ARCHITECTURE</span>
                 <ArrowUpRight className="w-5 h-5 ml-2" />
-              </a>
+              </Button>
 
-              <a
-                href="#installation"
-                className="brutal-btn bg-[#FFFFFF] hover:bg-[#F5F3EF] text-[#0A0A0A] border-2 border-[#0A0A0A] px-6 py-4 text-sm font-bold tracking-wider brutal-shadow hover:text-[#FF5A1F]"
+              <Button
+                variant="secondary"
+                size="md"
+                href="#status"
+                className="py-4"
               >
-                <span>VIEW INSTALL GUIDE</span>
+                <span>DEVELOPMENT STATUS</span>
                 <ArrowDown className="w-4 h-4 ml-2 text-[#FF5A1F]" />
-              </a>
+              </Button>
             </div>
 
             {/* Technical Sub-note */}
-            <div className="flex items-center gap-2 pt-2 text-xs font-mono text-[#0A0A0A]/60">
-              <span className="w-2 h-2 bg-emerald-500 rounded-none animate-pulse" />
-              <span>CURRENT STATUS: ACTIVE PROTOTYPE // ROLLING EXPERIMENTATION</span>
+            <div className="flex items-center gap-2 pt-2 text-xs font-mono text-[#0A0A0A]/70">
+              <span className="w-2 h-2 bg-[#FF5A1F] rounded-none animate-pulse" />
+              <span>STATUS: {siteConfig.releaseStatus}</span>
             </div>
           </div>
 
@@ -107,10 +110,10 @@ export const HeroSection: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 bg-[#FF5A1F]" />
                   <span className="font-bold text-[#FF9B42]">guruos-shell</span>
-                  <span className="text-[#FFFFFF]/40">// hyprland:ws1</span>
+                  <span className="text-[#FFFFFF]/40">{"// hyprland:ws1"}</span>
                 </div>
                 <div className="flex items-center gap-3 text-[11px] text-[#FFFFFF]/70">
-                  <span className="hidden sm:inline">RAM: 1.8G</span>
+                  <span className="hidden sm:inline">ARCH X86_64</span>
                   <span className="text-[#FF5A1F] font-bold">WAYLAND</span>
                   <span className="w-2 h-2 bg-[#FF5A1F]" />
                 </div>
@@ -126,7 +129,7 @@ export const HeroSection: React.FC = () => {
                       <Terminal className="w-3 h-3 text-[#FF5A1F]" />
                       alacritty — guru@machine:~
                     </span>
-                    <span className="text-[#FF9B42]">ARCH x86_64</span>
+                    <span className="text-[#FF9B42]">DEV SNAPSHOT</span>
                   </div>
 
                   {/* Terminal ASCII Art & Fastfetch */}
@@ -135,19 +138,19 @@ export const HeroSection: React.FC = () => {
                       {"  /\\       GURUOS // PROTOTYPE"}
                     </div>
                     <div className="text-[#FF5A1F] font-bold">
-                      {" /  \\      OS: GuruOS (Arch-based)"}
+                      {" /  \\      OS: Arch Linux Base"}
                     </div>
                     <div className="text-[#FF9B42]">
-                      {"/ /\\ \\     SHELL: Native GTK4 Panel"}
+                      {"/ /\\ \\     SHELL: Rust + GTK4 (libadwaita)"}
                     </div>
                     <div className="text-[#FF9B42]">
                       {"\\ \\/ /     WM: Hyprland (Wayland)"}
                     </div>
                     <div className="text-[#FFFFFF]/80">
-                      {" \\  /      KERNEL: Linux 6.12-arch"}
+                      {" \\  /      AI: Ask GURUOS (Ollama / MCP)"}
                     </div>
                     <div className="text-[#FFFFFF]/80">
-                      {"  \\/       CPU: x86_64 Architecture"}
+                      {"  \\/       BUILD: guruos-0.1.0-dev-x86_64"}
                     </div>
                   </div>
 

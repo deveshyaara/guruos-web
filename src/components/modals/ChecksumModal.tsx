@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { SparkIcon } from "../icons/SparkIcon";
 import { siteConfig } from "@/config/siteConfig";
 import { X, Copy, Check, ShieldCheck, Terminal } from "lucide-react";
 
@@ -18,8 +17,9 @@ export const ChecksumModal: React.FC<ChecksumModalProps> = ({
 
   if (!isOpen) return null;
 
-  const checksumString = siteConfig.release.sha256Checksum || "SHA256 CHECKSUM PENDING SIGNATURE (PRE-RELEASE)";
-  const verifyCommand = `sha256sum -c guruos-x86_64.iso.sha256`;
+  const isoName = siteConfig.isoFileName || "guruos-0.1.0-dev-x86_64.iso";
+  const checksumString = siteConfig.sha256Checksum || "SHA256 CHECKSUM PENDING SIGNATURE (PRE-RELEASE TEST ARTIFACT)";
+  const verifyCommand = `sha256sum -c ${isoName}.sha256`;
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -40,7 +40,7 @@ export const ChecksumModal: React.FC<ChecksumModalProps> = ({
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 border-2 border-[#0A0A0A] bg-[#FFFFFF] hover:bg-[#FF5A1F] hover:text-[#FFFFFF] transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF5A1F]"
+          className="absolute top-4 right-4 p-1.5 border-2 border-[#0A0A0A] bg-[#FFFFFF] hover:bg-[#FF5A1F] hover:text-[#FFFFFF] transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF5A1F] cursor-pointer"
           aria-label="Close dialog"
         >
           <X className="w-5 h-5" />
@@ -50,7 +50,7 @@ export const ChecksumModal: React.FC<ChecksumModalProps> = ({
         <div className="mb-6 space-y-2">
           <div className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold text-[#FF5A1F] bg-[#F5F3EF] border border-[#0A0A0A] px-2 py-0.5 uppercase">
             <ShieldCheck className="w-3.5 h-3.5 text-[#FF5A1F]" />
-            <span>IMAGE INTEGRITY & CRYPTOGRAPHY</span>
+            <span>IMAGE INTEGRITY &amp; CRYPTOGRAPHY</span>
           </div>
           <h3
             id="checksum-modal-title"
@@ -59,7 +59,7 @@ export const ChecksumModal: React.FC<ChecksumModalProps> = ({
             VERIFY GURUOS IMAGE.
           </h3>
           <p className="text-xs sm:text-sm text-[#0A0A0A]/70 font-mono">
-            Always verify the cryptographic signature and checksum before flashing installation media to prevent corruption or tampering.
+            Target development artifact: <strong className="text-[#0A0A0A]">{isoName}</strong>. Always verify cryptographic integrity before flashing installation media.
           </p>
         </div>
 
@@ -70,17 +70,17 @@ export const ChecksumModal: React.FC<ChecksumModalProps> = ({
             <div className="flex items-center justify-between font-mono text-xs font-bold uppercase text-[#0A0A0A]">
               <span>SHA-256 HASH (STATUS)</span>
               <span className="text-[#FF5A1F] text-[10px] bg-[#FFFFFF] border border-[#0A0A0A] px-1.5 py-0.5">
-                {siteConfig.release.sha256Checksum ? "PUBLISHED" : "UNPUBLISHED (PROTOTYPE)"}
+                {siteConfig.sha256Checksum ? "PUBLISHED" : "UNCOMPUTED (DEV PREVIEW)"}
               </span>
             </div>
             
             <div className="p-2.5 bg-[#0A0A0A] text-[#FFFFFF] font-mono text-xs break-all flex items-center justify-between gap-2 border border-[#0A0A0A]">
               <span>{checksumString}</span>
-              {siteConfig.release.sha256Checksum && (
+              {siteConfig.sha256Checksum && (
                 <button
                   type="button"
                   onClick={() => copyToClipboard(checksumString)}
-                  className="shrink-0 p-1 text-[#FF5A1F] hover:text-[#FFFFFF]"
+                  className="shrink-0 p-1 text-[#FF5A1F] hover:text-[#FFFFFF] cursor-pointer"
                   aria-label="Copy checksum"
                 >
                   {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -100,7 +100,7 @@ export const ChecksumModal: React.FC<ChecksumModalProps> = ({
               <button
                 type="button"
                 onClick={() => copyToClipboard(verifyCommand)}
-                className="text-[#FF5A1F] hover:text-[#FFFFFF] p-1"
+                className="text-[#FF5A1F] hover:text-[#FFFFFF] p-1 cursor-pointer"
                 aria-label="Copy verify command"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -108,16 +108,16 @@ export const ChecksumModal: React.FC<ChecksumModalProps> = ({
             </div>
           </div>
 
-          <div className="p-3 bg-[#FFFFFF] border border-[#0A0A0A] font-mono text-[11px] text-[#0A0A0A]/70 space-y-1">
-            <p><strong>Note on Pre-Release Integrity:</strong></p>
-            <p>Official cryptographic hashes (SHA-256 and GPG signatures) will be published directly alongside the ISO binary once the public milestone is tagged on GitHub.</p>
+          <div className="p-3 bg-[#FFFFFF] border border-[#0A0A0A] font-mono text-[11px] text-[#0A0A0A]/80 space-y-1">
+            <p><strong>Pre-Release Integrity Policy:</strong></p>
+            <p>Official cryptographic hashes (SHA-256 and GPG image signatures) will be published directly alongside the ISO binary once public distribution channels are opened. No fabricated hash is rendered.</p>
           </div>
 
           <div className="pt-2">
             <button
               type="button"
               onClick={onClose}
-              className="w-full brutal-btn bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] py-3 text-xs font-bold uppercase tracking-wider"
+              className="w-full brutal-btn bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] py-3 text-xs font-bold uppercase tracking-wider cursor-pointer"
             >
               CLOSE
             </button>

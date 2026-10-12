@@ -1,8 +1,6 @@
-"use client";
-
 import React from "react";
 import { SparkIcon } from "./icons/SparkIcon";
-import { Terminal, Cpu, Sparkles } from "lucide-react";
+import { siteConfig } from "@/config/siteConfig";
 
 export const ProductIntro: React.FC = () => {
   return (
@@ -13,10 +11,10 @@ export const ProductIntro: React.FC = () => {
         <div className="flex items-center justify-between border-b-2 border-[#0A0A0A] pb-3 mb-12">
           <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase text-[#0A0A0A]">
             <span className="w-2.5 h-2.5 bg-[#FF5A1F]" />
-            <span>SECTION 02 // ARCHITECTURE & VISION</span>
+            <span>SECTION 02 // IDENTITY & PHILOSOPHY</span>
           </div>
           <div className="font-mono text-xs text-[#0A0A0A]/60 hidden sm:block">
-            // STATUS: EXPERIMENTAL PROTOCOL
+            {"// STATUS: DEVELOPMENT PREVIEW // ARCH-BASED"}
           </div>
         </div>
 
@@ -27,16 +25,16 @@ export const ProductIntro: React.FC = () => {
           <div className="lg:col-span-5 space-y-6">
             <h2 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase text-[#0A0A0A] leading-[0.92]">
               NOT JUST <br />
-              <span className="text-[#FF5A1F]">ANOTHER</span> <br />
-              DESKTOP.
+              <span className="text-[#FF5A1F]">A THEME.</span> <br />
+              A SHELL.
             </h2>
 
             <div className="border-l-4 border-[#0A0A0A] pl-4 py-1 space-y-2">
               <p className="font-mono text-xs uppercase tracking-wider text-[#FF5A1F] font-bold">
-                BUILT FROM SCRATCH // NO BLOAT
+                DISTINCT LINUX IDENTITY // NO FORCED DEFAULTS
               </p>
               <p className="text-sm text-[#0A0A0A]/80 leading-relaxed font-medium">
-                Modern desktop operating systems have become opaque silos that hide how things work. GuruOS brings back raw transparency, high performance, and deep command over your machine.
+                The project focuses on creating a recognizable, customizable Linux desktop experience rather than simply applying a theme to a stock desktop environment.
               </p>
             </div>
 
@@ -44,13 +42,13 @@ export const ProductIntro: React.FC = () => {
             <div className="p-4 bg-[#F5F3EF] border-2 border-[#0A0A0A] brutal-shadow space-y-2">
               <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase text-[#0A0A0A]">
                 <SparkIcon className="w-4 h-4 text-[#FF5A1F]" />
-                <span>CORE FOUNDATION SPECS</span>
+                <span>ARCHITECTURAL SNAPSHOT</span>
               </div>
               <ul className="font-mono text-xs text-[#0A0A0A]/80 space-y-1">
-                <li>• Linux Kernel: 6.x (Arch-rolling)</li>
-                <li>• Compositor: Hyprland (Wayland)</li>
-                <li>• Desktop Shell: Native GTK4 (Rust-based)</li>
-                <li>• Intelligence: Ask GURUOS Engine</li>
+                <li>• Base: Arch Linux rolling-release foundation</li>
+                <li>• Compositor: Hyprland (Wayland display protocol)</li>
+                <li>• Desktop Shell: Native Rust (GTK4 + libadwaita)</li>
+                <li>• Workflow: Experimental Ask GURUOS assistant</li>
               </ul>
             </div>
           </div>
@@ -61,10 +59,10 @@ export const ProductIntro: React.FC = () => {
             {/* Overview Explanation */}
             <div className="space-y-4">
               <p className="text-xl sm:text-2xl text-[#0A0A0A] font-medium leading-relaxed">
-                Meet <strong className="font-black text-[#0A0A0A]">GuruOS</strong> — an Arch Linux-based desktop experience built around a distinctive native shell and an integrated AI-assisted workflow. Take control of your desktop, explore the system, and make it yours.
+                Meet <strong className="font-black text-[#0A0A0A]">{siteConfig.productName}</strong> — {siteConfig.supportingStatement}
               </p>
               <p className="text-base text-[#0A0A0A]/70 leading-relaxed">
-                Rather than treating the user as a passive consumer, GuruOS provides intuitive native system controls alongside open configuration files. Every component is designed to be inspected, understood, and reshaped. Planned capabilities are being built iteratively in the open.
+                GuruOS is built for developers, Linux enthusiasts, students, contributors, and technically curious users. It is an independent engineering project with an expressive aesthetic, an open-source mindset, and honest technical boundaries.
               </p>
             </div>
 
@@ -81,13 +79,13 @@ export const ProductIntro: React.FC = () => {
                   </span>
                   <div className="space-y-2 flex-1">
                     <h3 className="text-xl sm:text-2xl font-black tracking-tight uppercase text-[#0A0A0A] flex items-center justify-between">
-                      <span>YOUR WORKSPACE</span>
+                      <span>NATIVE GTK4 SHELL</span>
                       <span className="font-mono text-xs text-[#FF5A1F] font-bold uppercase border border-[#FF5A1F] px-2 py-0.5">
-                        GTK4 + HYPRLAND
+                        RUST + LAYER-SHELL
                       </span>
                     </h3>
                     <p className="text-base text-[#0A0A0A]/80 leading-relaxed">
-                      A desktop experience built around dynamic workspaces and a custom native panel. Smooth Wayland gestures, ultra-responsive tiling, and zero unnecessary background processes.
+                      A custom top panel written in Rust using GTK4, libadwaita, and gtk4-layer-shell. Integrates desktop branding, dynamic workspace buttons, and native system controls with zero bloated web runtimes.
                     </p>
                   </div>
                 </div>
@@ -101,13 +99,13 @@ export const ProductIntro: React.FC = () => {
                   </span>
                   <div className="space-y-2 flex-1">
                     <h3 className="text-xl sm:text-2xl font-black tracking-tight uppercase text-[#0A0A0A] flex items-center justify-between">
-                      <span>YOUR COMMAND CENTER</span>
+                      <span>HYPRLAND WORKSPACES</span>
                       <span className="font-mono text-xs text-[#FF5A1F] font-bold uppercase border border-[#FF5A1F] px-2 py-0.5">
-                        ASK GURUOS
+                        WAYLAND PROTOCOL
                       </span>
                     </h3>
                     <p className="text-base text-[#0A0A0A]/80 leading-relaxed">
-                      Ask GURUOS brings an AI-assisted interaction concept directly into the desktop workflow. Ask questions about your setup, manage system configuration with natural language, and get instant technical assistance without leaving your terminal.
+                      Hyprland powers dynamic workspace management and fluid window tiling over the Wayland display protocol. Panel workspace buttons synchronize directly with Hyprland workspace state.
                     </p>
                   </div>
                 </div>
@@ -121,13 +119,13 @@ export const ProductIntro: React.FC = () => {
                   </span>
                   <div className="space-y-2 flex-1">
                     <h3 className="text-xl sm:text-2xl font-black tracking-tight uppercase text-[#0A0A0A] flex items-center justify-between">
-                      <span>YOUR SYSTEM</span>
+                      <span>ASK GURUOS WORKFLOW</span>
                       <span className="font-mono text-xs text-[#FF5A1F] font-bold uppercase border border-[#FF5A1F] px-2 py-0.5">
-                        ARCH LINUX
+                        EXPERIMENTAL AI
                       </span>
                     </h3>
                     <p className="text-base text-[#0A0A0A]/80 leading-relaxed">
-                      An Arch Linux-based foundation for people interested in customizing and exploring their computing environment. Tap into the official Arch repositories and the AUR with bleeding-edge packages and total user sovereignty.
+                      A native text-entry field in the top panel triggers an interactive chat workflow upon pressing Enter. Tested in development with Ollama and a separate GuruOS MCP service for local agent experimentation.
                     </p>
                   </div>
                 </div>
@@ -136,9 +134,9 @@ export const ProductIntro: React.FC = () => {
             </div>
 
             {/* Disclaimer on experimental nature */}
-            <div className="font-mono text-xs text-[#0A0A0A]/60 bg-[#F5F3EF] border border-[#0A0A0A] p-3 flex items-center gap-2">
+            <div className="font-mono text-xs text-[#0A0A0A]/70 bg-[#F5F3EF] border border-[#0A0A0A] p-3 flex items-center gap-2">
               <span className="w-2 h-2 bg-[#FF5A1F]" />
-              <span>NOTE: Features in development prototype stages are actively being shaped. We do not make claims of unverified stability or features not yet in the build.</span>
+              <span>HONEST SCOPE: GuruOS is an Arch-based desktop experience, not a proprietary kernel or a finished commercial appliance.</span>
             </div>
 
           </div>

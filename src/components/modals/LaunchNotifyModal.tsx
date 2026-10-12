@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { SparkIcon } from "../icons/SparkIcon";
-import { X, CheckCircle, BellRing, ArrowRight } from "lucide-react";
+import { X, CheckCircle, ArrowRight } from "lucide-react";
 
 interface LaunchNotifyModalProps {
   isOpen: boolean;

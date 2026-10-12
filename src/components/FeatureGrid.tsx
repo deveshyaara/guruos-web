@@ -1,100 +1,61 @@
-"use client";
-
 import React from "react";
-import { SparkIcon, StarburstSpark } from "./icons/SparkIcon";
-import { BrutalFlame } from "./icons/BrutalFlame";
+import { coreFeaturePillars } from "@/data/featuresData";
+import { SectionHeader } from "./ui/SectionHeader";
 import { 
   Layers, 
-  Terminal, 
   Bot, 
   TerminalSquare, 
   ArrowUpRight, 
-  ShieldCheck, 
-  Sparkles,
-  Command,
   LayoutGrid
 } from "lucide-react";
 
 export const FeatureGrid: React.FC = () => {
-  const features = [
-    {
-      num: "01",
-      tag: "CORE ARCHITECTURE",
-      title: "Native Desktop Shell",
-      description: "A Rust-based, GTK4 desktop shell designed around a streamlined top panel and desktop controls. Memory safe, light on resources, and deeply integrated with the display server.",
-      theme: "light", // White bg, black text, orange accent
-      icon: (
-        <div className="w-12 h-12 bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] flex items-center justify-center group-hover:bg-[#FF5A1F] transition-colors">
-          <LayoutGrid className="w-6 h-6 text-[#FFFFFF]" />
-        </div>
-      ),
-      techSpecs: ["GTK4 / Libadwaita", "Rust Daemon", "Wayland Native"],
-    },
-    {
-      num: "02",
-      tag: "WAYLAND COMPOSITOR",
-      title: "Hyprland Workspaces",
-      description: "A dynamic workspace experience built around the Hyprland Wayland compositor. Fluid animations, instant keybindings, and dynamic window management that never stutters.",
-      theme: "dark", // Pitch black bg, white text, orange accent
-      icon: (
-        <div className="w-12 h-12 bg-[#FF5A1F] text-[#0A0A0A] border-2 border-[#0A0A0A] flex items-center justify-center group-hover:bg-[#FFFFFF] transition-colors">
-          <Layers className="w-6 h-6 text-[#0A0A0A]" />
-        </div>
-      ),
-      techSpecs: ["Hyprland v0.45+", "wlroots", "Dynamic Tiling"],
-    },
-    {
-      num: "03",
-      tag: "INTELLIGENT WORKFLOW",
-      title: "Ask GURUOS",
-      description: "An AI-assisted desktop interaction concept designed to bring natural-language assistance closer to the user. Query system configurations, diagnose issues, and navigate Linux effortlessly.",
-      theme: "orange", // Soft off-white or high-contrast fire orange accent
-      icon: (
-        <div className="w-12 h-12 bg-[#0A0A0A] text-[#FF5A1F] border-2 border-[#0A0A0A] flex items-center justify-center group-hover:bg-[#FF5A1F] group-hover:text-[#FFFFFF] transition-colors">
-          <Bot className="w-6 h-6" />
-        </div>
-      ),
-      techSpecs: ["Natural Language HUD", "System Context", "Terminal Bridge"],
-    },
-    {
-      num: "04",
-      tag: "SYSTEM FREEDOM",
-      title: "Linux Freedom",
-      description: "An Arch Linux-based environment for users who enjoy learning, configuring, and taking ownership of their systems. No telemetry, no walled gardens, no forced defaults.",
-      theme: "soft", // Soft off-white bg
-      icon: (
-        <div className="w-12 h-12 bg-[#FF5A1F] text-[#FFFFFF] border-2 border-[#0A0A0A] flex items-center justify-center group-hover:bg-[#0A0A0A] transition-colors">
-          <TerminalSquare className="w-6 h-6 text-[#FFFFFF]" />
-        </div>
-      ),
-      techSpecs: ["Arch Linux Core", "Pacman + AUR Access", "Zero Bloatware"],
-    },
-  ];
+  const getIcon = (name: string) => {
+    switch (name) {
+      case "LayoutGrid":
+        return (
+          <div className="w-12 h-12 bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] flex items-center justify-center group-hover:bg-[#FF5A1F] transition-colors">
+            <LayoutGrid className="w-6 h-6 text-[#FFFFFF]" />
+          </div>
+        );
+      case "Layers":
+        return (
+          <div className="w-12 h-12 bg-[#FF5A1F] text-[#0A0A0A] border-2 border-[#0A0A0A] flex items-center justify-center group-hover:bg-[#FFFFFF] transition-colors">
+            <Layers className="w-6 h-6 text-[#0A0A0A]" />
+          </div>
+        );
+      case "Bot":
+        return (
+          <div className="w-12 h-12 bg-[#0A0A0A] text-[#FF5A1F] border-2 border-[#0A0A0A] flex items-center justify-center group-hover:bg-[#FF5A1F] group-hover:text-[#FFFFFF] transition-colors">
+            <Bot className="w-6 h-6" />
+          </div>
+        );
+      case "TerminalSquare":
+      default:
+        return (
+          <div className="w-12 h-12 bg-[#FF5A1F] text-[#FFFFFF] border-2 border-[#0A0A0A] flex items-center justify-center group-hover:bg-[#0A0A0A] transition-colors">
+            <TerminalSquare className="w-6 h-6 text-[#FFFFFF]" />
+          </div>
+        );
+    }
+  };
 
   return (
     <section id="features" className="bg-[#FFFFFF] py-20 lg:py-28 border-b-2 border-[#0A0A0A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b-2 border-[#0A0A0A] gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase text-[#FF5A1F] mb-2">
-              <SparkIcon className="w-3.5 h-3.5 text-[#FF5A1F]" />
-              <span>SECTION 03 // CORE CAPABILITIES</span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter uppercase text-[#0A0A0A]">
-              BUILT FOR CONTROL. <br />
-              <span className="text-[#FF5A1F]">SHAPED BY FIRE.</span>
-            </h2>
-          </div>
-          <p className="max-w-md font-mono text-xs sm:text-sm text-[#0A0A0A]/70 font-medium">
-            Every layer of GuruOS is assembled with intent. An asymmetric architecture engineered to provide power without sacrificing clarity.
-          </p>
-        </div>
+        <SectionHeader
+          sectionNumber="04"
+          categoryTag="CORE CAPABILITIES"
+          titlePart1="BUILT FOR CONTROL."
+          titlePart2="SHAPED BY FIRE."
+          description="Every layer of GuruOS is assembled with intent: native Rust shell, Hyprland Wayland compositor, Arch Linux rolling foundation, and experimental AI workflows."
+        />
 
         {/* Asymmetrical Feature Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {features.map((feature) => {
+          {coreFeaturePillars.map((feature) => {
             const isDark = feature.theme === "dark";
             const isSoft = feature.theme === "soft";
 
@@ -138,7 +99,7 @@ export const FeatureGrid: React.FC = () => {
 
                   {/* Icon & Title */}
                   <div className="pt-6 space-y-4">
-                    {feature.icon}
+                    {getIcon(feature.iconName)}
                     <h3 className="text-2xl sm:text-3xl font-black tracking-tight uppercase">
                       {feature.title}
                     </h3>

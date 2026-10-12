@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { siteConfig } from "@/config/siteConfig";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -23,10 +24,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "GuruOS — Your Machine. Your Rules.",
-  description:
-    "Explore GuruOS, an Arch Linux-based desktop experience. Discover its features, download available builds, and follow the installation guide.",
-  metadataBase: new URL("https://guruos.org"),
+  title: `${siteConfig.productName} — ${siteConfig.headline} ${siteConfig.tagline}`,
+  description: siteConfig.supportingStatement,
+  metadataBase: new URL(siteConfig.siteUrl),
   authors: [{ name: "GuruOS Project Team" }],
   keywords: [
     "GuruOS",
@@ -34,24 +34,23 @@ export const metadata: Metadata = {
     "Hyprland",
     "Wayland",
     "GTK4 Desktop Shell",
-    "Linux Desktop",
+    "Rust Shell",
     "Ask GURUOS",
     "Independent Operating System",
+    "Linux Desktop",
   ],
   openGraph: {
-    title: "GuruOS — Your Machine. Your Rules.",
-    description:
-      "Explore GuruOS, an Arch Linux-based desktop experience. Discover its features, download available builds, and follow the installation guide.",
-    url: "https://guruos.org",
-    siteName: "GuruOS",
+    title: `${siteConfig.productName} — ${siteConfig.headline}`,
+    description: siteConfig.supportingStatement,
+    url: siteConfig.siteUrl,
+    siteName: siteConfig.productName,
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GuruOS — Your Machine. Your Rules.",
-    description:
-      "An Arch Linux-based desktop experience with a native GTK4 shell, dynamic Hyprland workspaces, and Ask GURUOS.",
+    title: `${siteConfig.productName} — ${siteConfig.headline}`,
+    description: siteConfig.supportingStatement,
   },
   icons: {
     icon: "/favicon.ico",
@@ -68,7 +67,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen bg-pure-white text-pitch-black selection:bg-fire-orange selection:text-pitch-black flex flex-col font-sans">
+      <body className="min-h-screen bg-[#FFFFFF] text-[#0A0A0A] selection:bg-[#FF5A1F] selection:text-[#0A0A0A] flex flex-col font-sans">
         {children}
       </body>
     </html>

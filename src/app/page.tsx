@@ -2,11 +2,13 @@ import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { ProductIntro } from "@/components/ProductIntro";
+import { ArchitectureSection } from "@/components/ArchitectureSection";
 import { FeatureGrid } from "@/components/FeatureGrid";
 import { DesktopShowcase } from "@/components/DesktopShowcase";
+import { SystemRequirements } from "@/components/SystemRequirements";
+import { DevelopmentStatus } from "@/components/DevelopmentStatus";
 import { DownloadSection } from "@/components/DownloadSection";
 import { InstallationGuide } from "@/components/InstallationGuide";
-import { SystemRequirements } from "@/components/SystemRequirements";
 import { CommunitySection } from "@/components/CommunitySection";
 import { FAQSection } from "@/components/FAQSection";
 import { Footer } from "@/components/Footer";
@@ -14,39 +16,45 @@ import { Footer } from "@/components/Footer";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-[#FFFFFF] text-[#0A0A0A]">
-      {/* 01: Navigation */}
+      {/* 01: Global Sticky Navigation */}
       <Navbar />
 
       <main className="flex-1">
         {/* 02: Hero: The Fire Launch */}
         <HeroSection />
 
-        {/* 03: Product Introduction (Two-Column Editorial) */}
+        {/* 03: Product Identity & Philosophy (Editorial Overview) */}
         <ProductIntro />
 
-        {/* 04: Feature Grid (Asymmetrical Brutalist 4-Card Grid) */}
+        {/* 04: Visual Desktop Architecture (The 4 Layers & 9 Panel Items) */}
+        <ArchitectureSection />
+
+        {/* 05: Feature Grid (Asymmetrical Brutalist Pillars) */}
         <FeatureGrid />
 
-        {/* 05: Desktop Showcase (Immersive Dark Shell & Ask GURUOS HUD) */}
+        {/* 06: Desktop Showcase (Interactive HUD, 9 Panel Items, Ask GURUOS Chat) */}
         <DesktopShowcase />
 
-        {/* 06: Download GuruOS (Official Release Panel & Status Guard) */}
-        <DownloadSection />
-
-        {/* 07: Installation Guide (From Zero to Guru 4-Step Setup) */}
-        <InstallationGuide />
-
-        {/* 08: System Requirements (Brutalist Technical Specs Matrix) */}
+        {/* 07: System Requirements (Brutalist Technical Specs Matrix) */}
         <SystemRequirements />
 
-        {/* 09: Open Source & Community (Built to Be Explored) */}
+        {/* 08: Development Status & Known Limitations (Explicit 5-Badge Taxonomy) */}
+        <DevelopmentStatus />
+
+        {/* 09: Download GuruOS (Official Release Panel & Status Guard) */}
+        <DownloadSection />
+
+        {/* 10: Installation Guide (From Zero to Guru 4-Step Setup) */}
+        <InstallationGuide />
+
+        {/* 11: Open Source & Community (Built to Be Explored) */}
         <CommunitySection />
 
-        {/* 10: FAQ (Accordion Component with Cautious Draft Answers) */}
+        {/* 12: FAQ (Accordion Component with Transparent Answers) */}
         <FAQSection />
       </main>
 
-      {/* 11: Footer (Large Black Footer with Dynamic Year & Back to Top) */}
+      {/* 13: Footer (Brutalist Black Footer with Dynamic Year & Navigation) */}
       <Footer />
     </div>
   );
