@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --experimental-strip-types scripts/test-runner.ts"
   },
   "dependencies": {
     "lucide-react": "^1.55.0",

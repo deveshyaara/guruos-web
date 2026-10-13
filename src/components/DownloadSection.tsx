@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { siteConfig } from "@/config/siteConfig";
 import { ChecksumModal } from "./modals/ChecksumModal";
 import { LaunchNotifyModal } from "./modals/LaunchNotifyModal";
@@ -14,7 +15,10 @@ import {
   AlertCircle, 
   Bell, 
   Disc, 
-  Terminal
+  Terminal,
+  Sliders,
+  HelpCircle,
+  Clock
 } from "lucide-react";
 
 export const DownloadSection: React.FC = () => {
@@ -41,14 +45,14 @@ export const DownloadSection: React.FC = () => {
         {/* Section Header */}
         <SectionHeader
           sectionNumber="08"
-          categoryTag="SYSTEM DISTRIBUTION"
-          titlePart1="READY TO"
-          titlePart2="IGNITE?"
-          description="Development build information, build infrastructure specs, and early access channels."
+          categoryTag="RELEASE INFRASTRUCTURE"
+          titlePart1="RELEASE STATUS &"
+          titlePart2="DISTRIBUTION."
+          description="Honest release status. Maintainers configure public images upon successful build verification; no simulated or fake downloads."
           className="text-center md:items-center"
         />
 
-        {/* Central Prominent Product Release Panel */}
+        {/* Central Release Status Panel */}
         <div className="max-w-3xl mx-auto">
           <div className="border-3 border-[#0A0A0A] bg-[#FFFFFF] brutal-shadow-lg relative overflow-hidden">
             
@@ -81,7 +85,7 @@ export const DownloadSection: React.FC = () => {
                     {releaseStatus}
                   </div>
                   <div className="text-[#0A0A0A]/80 leading-relaxed">
-                    Development ISO artifact: <code className="bg-[#FFFFFF] border border-[#0A0A0A] px-1.5 py-0.2 font-bold text-[#FF5A1F]">{isoFileName}</code>. Public ISO images are under active internal testing and verification.
+                    Test image artifact: <code className="bg-[#FFFFFF] border border-[#0A0A0A] px-1.5 py-0.2 font-bold text-[#FF5A1F]">{isoFileName}</code>. The source repository is private and the ISO build pipeline is undergoing verification after a recent CI build step failure.
                   </div>
                 </div>
               </div>
@@ -105,9 +109,9 @@ export const DownloadSection: React.FC = () => {
                 </div>
 
                 <div className="border-2 border-[#0A0A0A] p-3 bg-[#FFFFFF]">
-                  <div className="text-[#0A0A0A]/50 text-[10px] uppercase font-bold">PUBLIC STATUS</div>
-                  <div className="font-black text-xs text-[#FF5A1F]">
-                    {isIsoAvailable ? "HOSTED" : "UNPUBLISHED"}
+                  <div className="text-[#0A0A0A]/50 text-[10px] uppercase font-bold">DOWNLOAD STATUS</div>
+                  <div className="font-black text-xs text-[#D83B12]">
+                    {isIsoAvailable ? "HOSTED" : "UNAVAILABLE"}
                   </div>
                 </div>
 
@@ -118,19 +122,19 @@ export const DownloadSection: React.FC = () => {
                 <div className="font-bold uppercase text-[#0A0A0A] flex items-center justify-between border-b border-[#0A0A0A]/10 pb-1.5">
                   <span className="flex items-center gap-1.5">
                     <Terminal className="w-3.5 h-3.5 text-[#FF5A1F]" />
-                    IMAGE PACKAGING INFRASTRUCTURE
+                    IMAGE PACKAGING &amp; CI REALITY
                   </span>
-                  <span className="text-[#FF5A1F] text-[10px]">ARCH-BASED</span>
+                  <span className="text-[#FF5A1F] text-[10px]">MKARCHISO</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] text-[#0A0A0A]/80">
                   <div>• Builder: <strong>{buildPipeline.builderTool}</strong></div>
-                  <div>• Package Specs: <strong>{buildPipeline.packageDefinitions}</strong></div>
-                  <div>• Orchestrator: <strong>{buildPipeline.buildScript}</strong></div>
+                  <div>• Last CI Run: <strong>Run {buildPipeline.lastCiRunId}</strong></div>
+                  <div>• CI Result: <strong className="text-[#D83B12]">{buildPipeline.lastCiRunStatus}</strong></div>
                 </div>
               </div>
 
-              {/* Primary Action Button */}
-              <div className="pt-2">
+              {/* Primary Action: Configurable Release Gate */}
+              <div className="pt-2 space-y-3">
                 {isIsoAvailable && release.isoDownloadUrl ? (
                   <Button
                     variant="primary"
@@ -138,22 +142,38 @@ export const DownloadSection: React.FC = () => {
                     href={release.isoDownloadUrl}
                     className="w-full py-5 text-center text-sm sm:text-base"
                   >
-                    <span>DOWNLOAD GURUOS ISO</span>
+                    <span>DOWNLOAD GURUOS ISO ({release.version})</span>
                     <ArrowUpRight className="w-5 h-5 ml-2" />
                   </Button>
                 ) : (
                   <div className="space-y-3">
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      onClick={() => setLaunchModalOpen(true)}
-                      className="w-full py-5 text-center text-sm sm:text-base"
-                    >
-                      <Bell className="w-5 h-5 mr-2" />
-                      <span>DEVELOPMENT BUILD / REGISTER FOR LAUNCH NOTIFICATION ↗</span>
-                    </Button>
-                    <div className="text-center font-mono text-[11px] text-[#0A0A0A]/60">
-                      Public download mirror not yet active. We do not provide non-functional download links.
+                    <div className="border-2 border-[#0A0A0A] bg-[#F5F3EF] p-4 text-center font-mono text-xs space-y-2">
+                      <div className="font-black uppercase text-[#0A0A0A] text-sm">
+                        DOWNLOAD NOT YET AVAILABLE
+                      </div>
+                      <p className="text-[#0A0A0A]/70 text-[11px] max-w-lg mx-auto">
+                        Official ISO downloads will be enabled here automatically once GitHub Actions build runs pass and maintainers sign release artifacts. No fake files or broken links are provided.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Link
+                        href="/install"
+                        className="flex-1 brutal-btn bg-[#FF5A1F] hover:bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] py-3.5 text-center font-mono text-xs font-black uppercase tracking-wider brutal-shadow flex items-center justify-center gap-2"
+                      >
+                        <Sliders className="w-4 h-4" />
+                        <span>OPEN CUSTOM INSTALLATION PLANNER ↗</span>
+                      </Link>
+
+                      <Button
+                        variant="secondary"
+                        size="md"
+                        onClick={() => setLaunchModalOpen(true)}
+                        className="py-3.5 text-xs font-mono"
+                      >
+                        <Bell className="w-4 h-4 mr-1.5" />
+                        <span>REGISTER FOR LAUNCH ALERT</span>
+                      </Button>
                     </div>
                   </div>
                 )}
@@ -162,38 +182,14 @@ export const DownloadSection: React.FC = () => {
               {/* Secondary Links Row */}
               <div className="pt-4 border-t-2 border-[#0A0A0A] flex flex-wrap items-center justify-between gap-4 font-mono text-xs font-bold uppercase">
                 
-                {release.releaseNotesUrl ? (
-                  <a
-                    href={release.releaseNotesUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-[#0A0A0A] hover:text-[#FF5A1F] underline decoration-[#0A0A0A] underline-offset-4"
-                  >
-                    <FileText className="w-4 h-4 text-[#FF5A1F]" />
-                    <span>Release Notes</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                ) : (
-                  <span className="flex items-center gap-1.5 text-[#0A0A0A]/50">
-                    <FileText className="w-4 h-4" />
-                    <span>Release Notes (Pending Tag)</span>
-                  </span>
-                )}
+                <span className="flex items-center gap-1.5 text-[#0A0A0A]/50">
+                  <FileText className="w-4 h-4" />
+                  <span>Release Notes (Pending Tag)</span>
+                </span>
 
-                {siteConfig.githubRepoUrl ? (
-                  <a
-                    href={siteConfig.githubRepoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-[#0A0A0A] hover:text-[#FF5A1F] underline decoration-[#0A0A0A] underline-offset-4"
-                  >
-                    <FileCode className="w-4 h-4 text-[#FF5A1F]" />
-                    <span>Source on GitHub</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                ) : (
-                  <span className="text-[#0A0A0A]/50">GitHub URL to be configured</span>
-                )}
+                <span className="text-[#0A0A0A]/50">
+                  Repo: Private Development
+                </span>
 
                 <button
                   type="button"
@@ -201,7 +197,7 @@ export const DownloadSection: React.FC = () => {
                   className="flex items-center gap-1.5 text-[#0A0A0A] hover:text-[#FF5A1F] underline decoration-[#0A0A0A] underline-offset-4 cursor-pointer"
                 >
                   <ShieldCheck className="w-4 h-4 text-[#FF5A1F]" />
-                  <span>Image Verification / Hashes</span>
+                  <span>Model &amp; Image Verification</span>
                 </button>
 
               </div>

@@ -44,6 +44,42 @@ export const InstallationGuide: React.FC = () => {
           description="Four steps. One new desktop. Built for people taking ownership of their hardware."
         />
 
+        {/* Custom Interactive Installer Wizard Callout Banner */}
+        <div className="mb-12 border-3 border-[#0A0A0A] bg-[#0A0A0A] text-[#FFFFFF] p-6 sm:p-8 brutal-shadow relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5A1F]/10 -mr-8 -mt-8 pointer-events-none rounded-full blur-2xl" />
+          
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+            <div className="space-y-3 max-w-3xl">
+              <div className="inline-flex items-center gap-2 font-mono text-xs font-bold text-[#FF5A1F] bg-[#181818] border border-[#FF5A1F]/40 px-2.5 py-1 uppercase">
+                <span className="w-2 h-2 bg-[#FF5A1F] animate-pulse" />
+                <span>INTERACTIVE INSTALLATION PLANNER</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-black uppercase text-[#FFFFFF] tracking-tight">
+                PLAN YOUR CUSTOM GURUOS SETUP IN 10 STEPS.
+              </h3>
+              <p className="font-mono text-xs sm:text-sm text-[#FFFFFF]/80 leading-relaxed">
+                Use our visual configuration wizard to plan your destination (Physical or QEMU/KVM), evaluate hardware sizing, inspect visual partition schemes, toggle desktop shell crates, set local Ollama AI preferences, and export an installation profile JSON. Safe and non-destructive in your browser.
+              </p>
+            </div>
+
+            <div className="shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3">
+              <a
+                href="/install"
+                className="brutal-btn bg-[#FF5A1F] hover:bg-[#FF9B42] text-[#0A0A0A] border-2 border-[#FFFFFF] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-center shadow-[4px_4px_0px_#FFFFFF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#FFFFFF] transition-all cursor-pointer"
+              >
+                LAUNCH 10-STEP PLANNER ↗
+              </a>
+              <button
+                type="button"
+                onClick={() => setGuideModalOpen(true)}
+                className="brutal-btn bg-[#181818] hover:bg-[#222222] text-[#FFFFFF] border border-[#FFFFFF]/30 px-5 py-3 text-xs font-bold uppercase tracking-wider text-center cursor-pointer"
+              >
+                VIEW MANUAL DRAFT GUIDE
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Four Large Numbered Blocks */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {installationSteps.map((step) => (

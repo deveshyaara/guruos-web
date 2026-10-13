@@ -33,14 +33,14 @@ export const DesktopShowcase: React.FC = () => {
   }>>([
     {
       sender: "user",
-      text: "Arrange development workspace: Rust project in Neovim left, terminal right",
+      text: "Check system statistics and local model service health",
       timestamp: "10:46:12"
     },
     {
       sender: "guruos",
-      text: "Dispatched Hyprland window arrangement. Split ratio 60/40. Initialized Rust Analyzer LSP.",
-      action: "hyprctl dispatch workspace 1; splitv; alacritty -e nvim",
-      details: "Tiling active on eDP-1. Latency: 38ms (local IPC).",
+      text: "System status: AMD A8-7410 (4 cores), RAM: 4.1 / 6.7 GiB allocated. guruos-mcp.service active on 127.0.0.1:8000. Ollama reachable on :11434 with os-agent model.",
+      action: "tool: get_system_stats && service_status --unit guruos-mcp",
+      details: "Dispatched via allow-listed tool registry. CPU load: 0.42. Model memory: 2.1 GB quantized.",
       timestamp: "10:46:13"
     }
   ]);
@@ -49,32 +49,32 @@ export const DesktopShowcase: React.FC = () => {
 
   const promptPresets = [
     {
-      label: "Rust Dev Layout",
-      prompt: "Reorganize workspace: split terminal left and open Neovim with Rust LSP",
-      action: "hyprctl dispatch workspace 1; splitv; alacritty -e nvim",
-      detail: "Configured dual pane tiling. Wayland scale 1.0. Zero frame latency.",
-      reply: "Configured dual pane tiling on workspace 1. Rust language server initialized."
+      label: "System Metrics",
+      prompt: "Get system stats: CPU utilization, memory draw, and load average",
+      action: "tool: get_system_stats",
+      detail: "CPU: 4 cores (AMD A8-7410) | RAM: 6.7 GiB | Load avg: 0.42, 0.38, 0.35",
+      reply: "CPU utilization: 18%. Memory: 3.8 GiB in use (including Ollama os-agent weights). System running comfortably on Wayland."
     },
     {
-      label: "Network Diagnostics",
-      prompt: "Check network connectivity and ping Arch Linux mirrors",
-      action: "guru-net --check-mirrors --rank-by-speed",
-      detail: "Mirror rank updated: Fastest mirror selected (latency 14ms).",
-      reply: "Network interfaces checked. Active connection: wlan0. Primary Arch mirror verified."
+      label: "Daemon Status",
+      prompt: "Inspect systemctl status for user guruos-mcp.service",
+      action: "tool: service_status --unit guruos-mcp.service",
+      detail: "Active: active (running) since Tue 2026-10-13 | Port: 127.0.0.1:8000 | PIDs: 1842",
+      reply: "guruos-mcp.service is active in user scope. FastAPI loopback server listening on port 8000. 44 test cases verified in CI."
     },
     {
-      label: "Fire-Orange Accent",
-      prompt: "Switch desktop shell accent to High-Contrast Fire Orange",
-      action: "gtk4-theme-daemon --set-accent '#FF5A1F' --borders heavy",
-      detail: "Applied #FF5A1F accents across GTK4 panel, Wayland borders, and Alacritty.",
-      reply: "Applied #FF5A1F fire-brutalist theme across native shell and terminal colors."
+      label: "Git Repository Audit",
+      prompt: "Show git status and recent commit log for the workspace",
+      action: "tool: git_status && git_log -n 3",
+      detail: "Head: 5a6e2cbbc279205f28abf2dea16fc289bf1fd053 | Working tree clean | Branch: main",
+      reply: "Audited main branch at commit 5a6e2cbbc. 15 Rust crates configured. Working tree clean."
     },
     {
-      label: "Arch Kernel Status",
-      prompt: "List recently updated AUR packages and system kernel version",
-      action: "pacman -Qe; uname -r",
-      detail: "Arch Linux 6.12.1-arch1-1-zen // 12 packages up-to-date.",
-      reply: "Kernel: Linux 6.12.1-arch. Pacman cache clean. 0 orphan dependencies."
+      label: "File Search",
+      prompt: "Find configuration files matching pattern *.toml in /etc/guruos",
+      action: "tool: file_search --path /etc/guruos --pattern *.toml",
+      detail: "Matches: /etc/guruos/shell.toml, /etc/guruos/hyprland.toml",
+      reply: "Found 2 configuration blueprints in /etc/guruos/. Read permissions verified for current non-root user."
     },
   ];
 
@@ -94,9 +94,9 @@ export const DesktopShowcase: React.FC = () => {
       sender: "guruos" as const,
       text: matchedPreset 
         ? matchedPreset.reply 
-        : `Processed via experimental Ollama/MCP pipeline: "${query}". Contextual system action prepared.`,
-      action: matchedPreset ? matchedPreset.action : "guru-mcp --dispatch-action context_eval",
-      details: matchedPreset ? matchedPreset.detail : "Evaluated with local Qwen2.5-3B-Instruct model (quantized dev prototype).",
+        : `Evaluated via bounded tool registry: "${query}". Read-only developer context retrieved safely.`,
+      action: matchedPreset ? matchedPreset.action : "tool: get_system_stats",
+      details: matchedPreset ? matchedPreset.detail : "Sanitized by Pydantic schema validator. Local Ollama inference on 127.0.0.1:11434.",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     };
 
@@ -517,7 +517,40 @@ export const DesktopShowcase: React.FC = () => {
 
         </div>
 
+        {/* Technical Notice on Known Issue #2 (Workspace Switching Mismatch) */}
+        <div className="mt-8 border-2 border-[#FFFFFF]/20 bg-[#141414] p-5 font-mono text-xs text-[#FFFFFF]/85 space-y-3">
+          <div className="flex items-center justify-between border-b border-[#FFFFFF]/15 pb-2">
+            <div className="flex items-center gap-2 font-bold text-[#FF5A1F] uppercase">
+              <AlertCircle className="w-4 h-4 text-[#FF5A1F]" />
+              <span>TECHNICAL NOTICE: ASK GURUOS WORKSPACE SWITCHING MISMATCH (ISSUE #2)</span>
+            </div>
+            <span className="text-[10px] text-[#FFFFFF]/50 font-bold">AUDIT FINDING</span>
+          </div>
+          <p className="font-sans text-xs sm:text-sm text-[#FFFFFF]/80 leading-relaxed">
+            The Ask GURUOS input placeholder currently hints at workspace switching (&quot;switch to workspace 2&quot;), but the current Phase 2 backend tool dispatcher does not yet implement that capability. Workspaces are switched directly via dynamic panel buttons or standard Hyprland keybindings (<code>Super + 1..4</code>). We explicitly report this limitation rather than advertising AI workspace switching as functional.
+          </p>
+        </div>
+
+        {/* Installation Experience Banner in Showcase */}
+        <div className="mt-6 border-3 border-[#FF5A1F] bg-[#1a1410] p-6 brutal-shadow-orange flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono text-xs">
+          <div className="space-y-1">
+            <div className="font-black text-sm uppercase text-[#FF5A1F]">
+              INTERACTIVE CUSTOM INSTALLATION EXPERIENCE
+            </div>
+            <p className="text-[#FFFFFF]/80 font-sans text-xs max-w-2xl">
+              Want to see how GuruOS installs? Explore our 10-step Windows-style guided wizard for hardware reviews, storage schemas, and local AI setup.
+            </p>
+          </div>
+          <a
+            href="/install"
+            className="brutal-btn bg-[#FF5A1F] hover:bg-[#FFFFFF] text-[#0A0A0A] border-2 border-[#0A0A0A] px-5 py-3 font-bold uppercase tracking-wider shrink-0"
+          >
+            LAUNCH INSTALLER WIZARD ↗
+          </a>
+        </div>
+
       </div>
     </section>
   );
 };
+

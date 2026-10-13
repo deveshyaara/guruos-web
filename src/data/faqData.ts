@@ -5,56 +5,77 @@ export const faqList: FAQItem[] = [
     id: "faq-1",
     question: "What is GuruOS?",
     answer:
-      "GuruOS is an independent Linux operating system project built on an Arch Linux foundation. It pairs the Hyprland Wayland compositor with a custom GTK4 desktop shell written in Rust and integrates an experimental AI-assisted desktop interface called Ask GURUOS. It is designed to deliver a high-performance, transparent desktop environment for developers and power users.",
-    tag: "CORE IDENTITY",
+      "GuruOS is an experimental Linux desktop environment combining an Arch Linux base, Hyprland running on Wayland, a native desktop shell written in Rust using GTK4, libadwaita, and GTK4 Layer Shell, and a Python-based local AI backend. Its central interaction is Ask GURUOS, an AI assistant integrated directly into the desktop shell rather than presented as a separate web application. The goal is to explore how a Linux desktop can combine system information, developer assistance, local inference, and controlled OS interactions.",
+    tag: "PRODUCT IDENTITY",
   },
   {
     id: "faq-2",
-    question: "Is GuruOS based on Arch Linux?",
+    question: "Is GuruOS a separate Linux distribution?",
     answer:
-      "Yes. GuruOS uses Arch Linux as its underlying base. This provides direct access to rolling-release packages, the Arch User Repository (AUR), and standard pacman package management, without adding an artificial layer of abstraction over core system files.",
-    tag: "SYSTEM BASE",
+      "GuruOS is built on Arch Linux as its operating-system foundation, rather than maintaining a completely independent kernel, package ecosystem, or repository infrastructure. It provides a customized desktop environment, shell, and AI backend on top of Arch's rolling-release system. GuruOS does not promise to inherit every upstream Arch Linux policy, configuration, or official support channel.",
+    tag: "DISTRIBUTION BASE",
   },
   {
     id: "faq-3",
-    question: "Who is GuruOS designed for?",
+    question: "Does GuruOS use a local AI model?",
     answer:
-      "GuruOS is created for developers, Linux enthusiasts, system experimenters, and curious power users who want a responsive, keyboard-driven Wayland desktop with native system controls. It is not intended as a locked-down consumer appliance, but as an open system meant to be understood and customized.",
-    tag: "AUDIENCE",
+      "Yes. The architecture is designed around local inference using Ollama running on loopback (127.0.0.1:11434). In the current repository, it targets the model alias 'os-agent' based on Qwen2.5-3B-Instruct.Q4_K_M.gguf (manifest SHA-256: 0a7744dc91d4ea7d17eb11a797be9116024d4eb69bafb3fbf1aa281982ca482e). Inference runs locally on your CPU or GPU without sending your queries to external cloud AI APIs.",
+    tag: "LOCAL AI INFERENCE",
   },
   {
     id: "faq-4",
-    question: "How do I download GuruOS?",
+    question: "Does AI work without an internet connection?",
     answer:
-      "During the initial prototype and pre-release development phase, public ISO images are actively being built and tested internally. You can register for launch notifications in the Download section above or monitor the official GitHub repository for published releases and signed images.",
-    tag: "DISTRIBUTION",
+      "Once the operating system and the model weights have been downloaded and verified on your device, inference itself operates locally on your machine. However, GuruOS does NOT promise that every operation is always completely offline: initial ISO downloads, model fetching during first-boot setup, pacman package updates, and general web browsing require an active internet connection.",
+    tag: "NETWORK REQUIREMENTS",
   },
   {
     id: "faq-5",
-    question: "How do I install GuruOS?",
+    question: "Can I install GuruOS on my physical computer?",
     answer:
-      "Once the ISO build is released, you will flash the image to a USB flash drive (using tools like Balena Etcher or Rufus), boot from the USB using your computer's boot menu, and follow the step-by-step installer. Exact installer behavior, partitioning tools, and post-install configuration scripts depend on the specific build and are documented in the release notes.",
-    tag: "INSTALLATION",
+      "Not yet through an automated native installer. As of October 13, 2026, GuruOS is in early development with a private repository. The documented ISO profile is a test-image foundation, not a production installer, and the disk-writing native installer is still under active development. You can use our interactive Custom Installation Planner at /install to preview and plan your configuration, but you should not attempt to write incomplete test images to primary physical hardware without an isolated testing environment and complete backups.",
+    tag: "HARDWARE INSTALLATION",
   },
   {
     id: "faq-6",
-    question: "Will installing GuruOS erase my existing files?",
+    question: "Is the ISO publicly available?",
     answer:
-      "If you choose to erase your entire drive during installation, yes — all existing partitions and files on that disk will be permanently removed. If you configure manual partitioning or a separate disk, other drives can be preserved. However, because partitioning and filesystem operations carry inherent risk, you must always back up all critical files to an external location before starting.",
-    tag: "DATA SAFETY",
+      "No. At the time of this audit, the source repository is private and no public GitHub releases have been published. A recent GitHub Actions ISO build run (Run 38157947896 on October 11, 2026) failed at the build step. Maintainers are validating build repeatability, boot reliability, and hardware compatibility before hosting public release artifacts.",
+    tag: "ISO AVAILABILITY",
   },
   {
     id: "faq-7",
-    question: "Can I try GuruOS without replacing my current operating system?",
+    question: "Can I try GuruOS in a virtual machine?",
     answer:
-      "In typical Linux releases, live USB sessions and virtualization tools (such as QEMU/KVM, VirtualBox, or VMware) allow testing the system without altering disk drives. Whether a fully functioning live desktop session or dual-boot wizard is supported depends on the specific build image, so please verify live session capabilities in the release notes for your version.",
-    tag: "TRIAL & VIRTUALIZATION",
+      "Virtual machines (such as QEMU/KVM, VirtualBox, or VMware) are the recommended path for evaluating development builds once test images are made available. A disposable VM prevents accidental disk modification on your host computer. Note that Wayland compositors (Hyprland) and local AI inference require allocating adequate virtualized GPU/CPU cores and RAM (typically 8 GB or more for model execution).",
+    tag: "VIRTUAL MACHINE TESTING",
   },
   {
     id: "faq-8",
-    question: "Where can I report bugs or contribute?",
+    question: "What hardware does GuruOS support?",
     answer:
-      "You can track development, submit bug reports, and join technical conversations through the official GitHub repository and discussions once open. As an open-source-minded project, feedback and issue triage will follow standard public issue tracking.",
-    tag: "CONTRIBUTING",
+      "GuruOS targets x86_64 systems running Arch Linux and Hyprland/Wayland. The documented developer reference machine is an AMD A8-7410 APU (4 cores, ~6.7 GiB RAM, integrated Radeon R5 graphics, Realtek RTL8723BE Wi-Fi), running inference on the CPU without CUDA/ROCm acceleration. These details represent an internal reference machine, not official minimum specifications. Broad OEM compatibility across diverse AMD, Intel, and NVIDIA configurations is under active evaluation.",
+    tag: "HARDWARE COMPATIBILITY",
+  },
+  {
+    id: "faq-9",
+    question: "Is GuruOS production-ready?",
+    answer:
+      "No. GuruOS is explicitly an experimental, early-development project. While core shell layouts, the Ask GURUOS GTK trigger, and Hyprland IPC integrations exist, several components remain in progress or incomplete (such as native quick settings, safe Polkit privilege escalation, and cross-hardware testing). It should not be used as a primary production operating system for mission-critical work.",
+    tag: "PROJECT READINESS",
+  },
+  {
+    id: "faq-10",
+    question: "Can I postpone model installation?",
+    answer:
+      "Yes. The first-boot setup workflow and the custom installation planner are designed to treat local AI as non-fatal to the desktop. If your hardware has low memory, if you prefer a lighter base system, or if your network connection is limited, you can defer model installation. The graphical desktop (Hyprland and the native Rust GTK4 shell) will remain fully functional and simply report that the AI backend is not active.",
+    tag: "MODULAR AI SETUP",
+  },
+  {
+    id: "faq-11",
+    question: "How do I report a problem?",
+    answer:
+      "Issue tracking will occur through the official GitHub repository issue tracker once authorized public access is configured. The project maintains an honest log of known limitations, including Issue #1 (Polkit authorization hardening), Issue #2 (Ask GURUOS workspace switching mismatch), Issue #3 (shell-common crate deduplication), Issue #4 (license decision), and Issue #5 (low-resource benchmark verification).",
+    tag: "ISSUE REPORTING",
   },
 ];

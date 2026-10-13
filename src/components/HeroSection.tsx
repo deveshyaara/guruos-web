@@ -1,22 +1,27 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
 import { SparkIcon } from "./icons/SparkIcon";
 import { GeometricFireSun } from "./icons/BrutalFlame";
-import { ArrowUpRight, ArrowDown, Terminal } from "lucide-react";
+import { ArrowUpRight, ArrowDown, Terminal, Sliders, Disc, ShieldAlert, X } from "lucide-react";
 import { siteConfig } from "@/config/siteConfig";
 import { Button } from "./ui/Button";
 
 export const HeroSection: React.FC = () => {
+  const [statusModalOpen, setStatusModalOpen] = useState(false);
+
   return (
-    <section className="relative bg-[#FFFFFF] border-b-2 border-[#0A0A0A] overflow-hidden pt-8 pb-16 lg:pt-16 lg:pb-24">
+    <section className="relative bg-[#FFFFFF] border-b-2 border-[#0A0A0A] overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24">
       {/* Background subtle technical grid lines */}
-      <div className="absolute inset-0 bg-grid-lines pointer-events-none opacity-70" />
+      <div className="absolute inset-0 bg-grid-lines pointer-events-none opacity-60" />
 
       {/* Floating technical corner coordinates */}
       <div className="hidden xl:flex absolute top-4 left-6 font-mono text-[11px] text-[#0A0A0A]/40 tracking-widest uppercase">
-        {"// LAT: 52.5200° N / LON: 13.4050° E — SYS: X86_64 // ARCH-BASED"}
+        {"// ARCH-BASED // HYPRLAND (WAYLAND) // RUST GTK4 SHELL // OLLAMA"}
       </div>
       <div className="hidden xl:flex absolute top-4 right-6 font-mono text-[11px] text-[#0A0A0A]/40 tracking-widest uppercase">
-        {`REV: ${siteConfig.releaseVersion} // ARTIFACT: ${siteConfig.isoFileName}`}
+        {`COMMIT: ${siteConfig.mainCommit.substring(0, 8)} // AUDIT: ${siteConfig.auditDate}`}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -25,24 +30,22 @@ export const HeroSection: React.FC = () => {
           {/* Left Column: Bold Typography & CTAs (7 cols on desktop) */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
             
-            {/* Eyebrow Label with Spark */}
+            {/* Eyebrow Label with Spark & Exact Prompt Copy */}
             <div className="inline-flex items-center gap-2 self-start bg-[#0A0A0A] text-[#FFFFFF] px-3 py-1.5 border border-[#0A0A0A] font-mono text-xs sm:text-sm font-bold tracking-wider uppercase brutal-shadow">
-              <SparkIcon className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "6s" }} color="#FF5A1F" />
-              <span>INDEPENDENT LINUX PROJECT</span>
-              <span className="text-[#FF5A1F] hidden sm:inline">/</span>
-              <span className="text-[#FF5A1F] hidden sm:inline">ARCH-BASED DESKTOP</span>
+              <SparkIcon className="w-3.5 h-3.5" color="#FF5A1F" />
+              <span>LOCAL-FIRST AI DESKTOP · EXPERIMENTAL BUILD</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[6.5rem] leading-[0.88] font-black tracking-tighter uppercase text-[#0A0A0A]">
-              <span className="block text-[#0A0A0A]">BREAK</span>
-              <span className="block text-[#FF5A1F] drop-shadow-[2px_2px_0px_#0A0A0A]">THE DEFAULT.</span>
+            {/* Main Headline (Exact Prompt Copy) */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.75rem] leading-[0.92] font-black tracking-tighter uppercase text-[#0A0A0A]">
+              <span className="block text-[#0A0A0A]">A DIFFERENT</span>
+              <span className="block text-[#FF5A1F] drop-shadow-[2px_2px_0px_#0A0A0A]">KIND OF DESKTOP.</span>
             </h1>
 
-            {/* Tagline & Supporting Copy */}
+            {/* Tagline & Supporting Paragraph (Exact Prompt Copy) */}
             <div className="space-y-4 max-w-xl">
               <p className="font-mono text-sm sm:text-base font-black text-[#FF5A1F] uppercase tracking-wide">
-                {siteConfig.tagline}
+                &ldquo;{siteConfig.tagline}&rdquo;
               </p>
               <p className="text-lg sm:text-xl text-[#0A0A0A] leading-relaxed font-medium">
                 {siteConfig.supportingStatement}
@@ -65,32 +68,44 @@ export const HeroSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-              <Button
-                variant="primary"
-                size="lg"
-                href="#architecture"
+            {/* Action Buttons (Three CTAs required by Prompt Section 4) */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+              {/* Primary CTA */}
+              <Link
+                href="/#explore"
+                className="brutal-btn bg-[#FF5A1F] hover:bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] px-6 py-4 font-mono text-xs font-black tracking-wider brutal-shadow flex items-center justify-center gap-2"
               >
-                <span>EXPLORE ARCHITECTURE</span>
-                <ArrowUpRight className="w-5 h-5 ml-2" />
-              </Button>
+                <span>EXPLORE GURUOS</span>
+                <ArrowDown className="w-4 h-4 ml-1" />
+              </Link>
 
-              <Button
-                variant="secondary"
-                size="md"
-                href="#status"
-                className="py-4"
+              {/* Secondary CTA */}
+              <Link
+                href="/install"
+                className="brutal-btn bg-[#FFFFFF] hover:bg-[#F5F3EF] text-[#0A0A0A] border-2 border-[#0A0A0A] px-6 py-4 font-mono text-xs font-black tracking-wider brutal-shadow flex items-center justify-center gap-2"
               >
-                <span>DEVELOPMENT STATUS</span>
-                <ArrowDown className="w-4 h-4 ml-2 text-[#FF5A1F]" />
-              </Button>
+                <Sliders className="w-4 h-4 text-[#FF5A1F]" />
+                <span>CUSTOM INSTALLATION</span>
+              </Link>
+
+              {/* Third Action: ISO Status */}
+              <button
+                type="button"
+                onClick={() => setStatusModalOpen(true)}
+                className="brutal-btn bg-[#F5F3EF] hover:bg-[#0A0A0A] hover:text-[#FFFFFF] text-[#0A0A0A] border-2 border-[#0A0A0A] px-4 py-4 font-mono text-xs font-bold tracking-wider flex items-center justify-center gap-1.5"
+              >
+                <Disc className="w-4 h-4 text-[#FF5A1F]" />
+                <span>ISO STATUS</span>
+              </button>
             </div>
 
-            {/* Technical Sub-note */}
-            <div className="flex items-center gap-2 pt-2 text-xs font-mono text-[#0A0A0A]/70">
-              <span className="w-2 h-2 bg-[#FF5A1F] rounded-none animate-pulse" />
-              <span>STATUS: {siteConfig.releaseStatus}</span>
+            {/* Honest Status Label */}
+            <div className="flex items-center gap-2 pt-2 text-xs font-mono text-[#0A0A0A]/80">
+              <span className="w-2.5 h-2.5 bg-[#FF5A1F] animate-pulse" />
+              <span className="font-bold text-[#0A0A0A]">STATUS:</span>
+              <span className="bg-[#F5F3EF] border border-[#0A0A0A] px-2 py-0.5 font-bold text-[#FF5A1F]">
+                {siteConfig.statusLabel}
+              </span>
             </div>
           </div>
 
@@ -98,7 +113,7 @@ export const HeroSection: React.FC = () => {
           <div className="lg:col-span-5 relative flex items-center justify-center">
             
             {/* Background Graphic: Orange Geometric Flame Sun */}
-            <div className="absolute -top-10 -right-6 pointer-events-none opacity-90 scale-90 sm:scale-100">
+            <div className="absolute -top-10 -right-6 pointer-events-none opacity-85 scale-90 sm:scale-100">
               <GeometricFireSun className="w-80 h-80 sm:w-96 sm:h-96" />
             </div>
 
@@ -129,34 +144,34 @@ export const HeroSection: React.FC = () => {
                       <Terminal className="w-3 h-3 text-[#FF5A1F]" />
                       alacritty — guru@machine:~
                     </span>
-                    <span className="text-[#FF9B42]">DEV SNAPSHOT</span>
+                    <span className="text-[#FF9B42]">DEV SNAPSHOT 2026</span>
                   </div>
 
                   {/* Terminal ASCII Art & Fastfetch */}
                   <div className="text-[11px] leading-tight text-[#FFFFFF] space-y-1">
                     <div className="text-[#FF5A1F] font-bold">
-                      {"  /\\       GURUOS // PROTOTYPE"}
+                      {"  /\\       GURUOS // EXPERIMENTAL BUILD"}
                     </div>
                     <div className="text-[#FF5A1F] font-bold">
-                      {" /  \\      OS: Arch Linux Base"}
+                      {" /  \\      BASE: Arch Linux (Rolling)"}
                     </div>
                     <div className="text-[#FF9B42]">
-                      {"/ /\\ \\     SHELL: Rust + GTK4 (libadwaita)"}
+                      {"/ /\\ \\     SHELL: Rust 2021 + GTK4 (15 Crates)"}
                     </div>
                     <div className="text-[#FF9B42]">
-                      {"\\ \\/ /     WM: Hyprland (Wayland)"}
+                      {"\\ \\/ /     WM: Hyprland (Wayland IPC)"}
                     </div>
                     <div className="text-[#FFFFFF]/80">
-                      {" \\  /      AI: Ask GURUOS (Ollama / MCP)"}
+                      {" \\  /      AI: Ollama (os-agent / Qwen2.5-3B)"}
                     </div>
                     <div className="text-[#FFFFFF]/80">
-                      {"  \\/       BUILD: guruos-0.1.0-dev-x86_64"}
+                      {"  \\/       BACKEND: Python MCP daemon (:8000)"}
                     </div>
                   </div>
 
                   <div className="pt-1 text-[#FF5A1F] text-[11px]">
                     <span className="text-[#FFFFFF]/50">guru@machine:~$ </span>
-                    <span>ask-guruos --status</span>
+                    <span>guruos-status --audit</span>
                     <span className="inline-block w-2 h-3.5 bg-[#FF5A1F] ml-1 animate-cursor-blink align-middle" />
                   </div>
                 </div>
@@ -172,12 +187,12 @@ export const HeroSection: React.FC = () => {
                         Ask GURUOS Desktop Assistant
                       </div>
                       <div className="text-[11px] text-[#FFFFFF]/90 truncate">
-                        &quot;Tile terminals left, focus Rust build, open docs&quot;
+                        &quot;Inspect git log &amp; systemctl status guruos-mcp&quot;
                       </div>
                     </div>
                   </div>
                   <span className="text-[10px] px-1.5 py-0.5 bg-[#FF5A1F] text-[#0A0A0A] font-bold uppercase">
-                    ACTIVE
+                    BOUNDED TOOL
                   </span>
                 </div>
 
@@ -186,20 +201,20 @@ export const HeroSection: React.FC = () => {
                   <div className="flex items-center gap-1 font-bold">
                     <span className="px-1.5 py-0.5 bg-[#FF5A1F] text-[#0A0A0A]">01:DEV</span>
                     <span className="px-1.5 py-0.5 bg-[#FFFFFF]/10 text-[#FFFFFF]/80">02:DOC</span>
-                    <span className="px-1.5 py-0.5 bg-[#FFFFFF]/10 text-[#FFFFFF]/80">03:WEB</span>
-                    <span className="px-1.5 py-0.5 bg-[#FFFFFF]/10 text-[#FFFFFF]/80">04:SYS</span>
+                    <span className="px-1.5 py-0.5 bg-[#FFFFFF]/10 text-[#FFFFFF]/80">03:SYS</span>
+                    <span className="px-1.5 py-0.5 bg-[#FFFFFF]/10 text-[#FFFFFF]/80">04:WEB</span>
                   </div>
-                  <span className="text-[#FF9B42]">GTK4 PANEL ACTIVE</span>
+                  <span className="text-[#FF9B42]">GTK4 LAYER ACTIVE</span>
                 </div>
               </div>
 
               {/* Bottom System Label and Disclaimer */}
               <div className="bg-[#171717] px-3 py-2 border-t-2 border-[#0A0A0A] flex flex-col sm:flex-row sm:items-center justify-between text-[10px] font-mono text-[#FFFFFF]/60 gap-1">
                 <span className="text-[#FF5A1F] font-bold">
-                  ARCH-BASED / HYPRLAND / NATIVE SHELL
+                  ARCH-BASED // HYPRLAND // NATIVE SHELL
                 </span>
                 <span className="text-white/40 italic">
-                  [ILLUSTRATIVE DESKTOP MOCKUP // EARLY PROTOCOL]
+                  [CONCEPT PREVIEW // REPOSITORY AUDITED]
                 </span>
               </div>
             </div>
@@ -215,6 +230,63 @@ export const HeroSection: React.FC = () => {
 
         </div>
       </div>
+
+      {/* ISO Status Modal (Prompt requirement: Display real release status without fake downloads) */}
+      {statusModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A0A0A]/80 backdrop-blur-xs animate-fadeIn"
+        >
+          <div className="relative w-full max-w-xl bg-[#FFFFFF] border-3 border-[#0A0A0A] p-6 sm:p-8 brutal-shadow-lg">
+            <button
+              type="button"
+              onClick={() => setStatusModalOpen(false)}
+              className="absolute top-4 right-4 p-2 border-2 border-[#0A0A0A] bg-[#FFFFFF] hover:bg-[#FF5A1F] hover:text-[#FFFFFF] transition-colors cursor-pointer"
+              aria-label="Close modal"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#FF5A1F] uppercase">
+                <Disc className="w-4 h-4 text-[#FF5A1F]" />
+                <span>OFFICIAL ISO RELEASE STATUS ({siteConfig.auditDate})</span>
+              </div>
+
+              <h3 className="text-2xl font-black uppercase text-[#0A0A0A]">
+                NO PUBLIC ISO DOWNLOAD HOSTED YET.
+              </h3>
+
+              <div className="p-4 bg-[#F5F3EF] border border-[#0A0A0A] font-mono text-xs space-y-2 text-[#0A0A0A]/85">
+                <p>
+                  <strong>Development Reality:</strong> The GuruOS source repository is currently private and no public releases are published. A recent GitHub Actions CI ISO build run (Run 38157947896 on October 11, 2026) failed at the build step.
+                </p>
+                <p>
+                  The current documented ArchISO profile serves as a test-image foundation rather than a production installer. We do not provide non-functional download links or simulate fake downloads.
+                </p>
+              </div>
+
+              <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/install"
+                  onClick={() => setStatusModalOpen(false)}
+                  className="brutal-btn bg-[#FF5A1F] text-[#FFFFFF] border-2 border-[#0A0A0A] p-3 text-xs font-bold uppercase tracking-wider text-center"
+                >
+                  OPEN INSTALLATION PLANNER ↗
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setStatusModalOpen(false)}
+                  className="brutal-btn bg-[#FFFFFF] text-[#0A0A0A] border-2 border-[#0A0A0A] p-3 text-xs font-bold uppercase tracking-wider"
+                >
+                  CLOSE
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

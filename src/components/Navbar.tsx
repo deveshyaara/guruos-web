@@ -4,27 +4,27 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { SparkIcon } from "./icons/SparkIcon";
 import { siteConfig } from "@/config/siteConfig";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Sliders, Disc } from "lucide-react";
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Overview", href: "#explore" },
-    { label: "Architecture", href: "#architecture" },
-    { label: "Features", href: "#features" },
-    { label: "Desktop HUD", href: "#showcase" },
-    { label: "Download", href: "#download" },
-    { label: "Status", href: "#status" },
-    { label: "Install", href: "#installation" },
-    { label: "Specs", href: "#specs" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Overview", href: "/#explore" },
+    { label: "Architecture", href: "/#architecture" },
+    { label: "Features", href: "/#features" },
+    { label: "Desktop HUD", href: "/#showcase" },
+    { label: "Status & Audit", href: "/#status" },
+    { label: "Specs", href: "/#specs" },
+    { label: "Release State", href: "/#download" },
+    { label: "FAQ", href: "/#faq" },
   ];
 
   return (
     <header className="sticky top-0 z-50 bg-[#FFFFFF] border-b-2 border-[#0A0A0A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
+          
           {/* Brand Wordmark with Spark */}
           <Link
             href="/"
@@ -47,36 +47,35 @@ export const Navbar: React.FC = () => {
           {/* Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#0A0A0A]">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
-                className="px-2.5 py-1.5 hover:bg-[#F5F3EF] hover:text-[#FF5A1F] transition-colors border-b-2 border-transparent hover:border-[#FF5A1F]"
+                className="px-2 py-1.5 hover:bg-[#F5F3EF] hover:text-[#FF5A1F] transition-colors border-b-2 border-transparent hover:border-[#FF5A1F]"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            {siteConfig.documentationUrl && (
-              <a
-                href={siteConfig.documentationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2.5 py-1.5 flex items-center gap-0.5 hover:bg-[#F5F3EF] hover:text-[#FF5A1F] transition-colors"
-              >
-                Docs
-                <ArrowUpRight className="w-3.5 h-3.5 text-[#FF5A1F]" />
-              </a>
-            )}
+
+            {/* Custom Install Wizard Route Link */}
+            <Link
+              href="/install"
+              className="ml-2 px-3 py-1 bg-[#F5F3EF] border-2 border-[#0A0A0A] text-[#FF5A1F] hover:bg-[#0A0A0A] hover:text-[#FFFFFF] transition-all flex items-center gap-1.5 brutal-shadow hover:translate-x-0.5"
+            >
+              <Sliders className="w-3.5 h-3.5" />
+              <span>CUSTOM INSTALL</span>
+              <span className="bg-[#FF5A1F] text-[#FFFFFF] text-[9px] px-1 py-0.2 font-black">WIZARD</span>
+            </Link>
           </nav>
 
           {/* Desktop Primary CTA */}
           <div className="hidden sm:flex items-center gap-3">
-            <a
-              href="#download"
-              className="brutal-btn bg-[#FF5A1F] hover:bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] px-4 py-2 text-xs font-black tracking-wider brutal-shadow hover:text-[#FFFFFF]"
+            <Link
+              href="/install"
+              className="brutal-btn bg-[#FF5A1F] hover:bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] px-4 py-2 text-xs font-black tracking-wider brutal-shadow hover:text-[#FFFFFF] flex items-center gap-1.5"
             >
-              <span>GET GURUOS</span>
-              <ArrowUpRight className="w-4 h-4 ml-1.5" />
-            </a>
+              <Sliders className="w-4 h-4" />
+              <span>INSTALLATION WIZARD</span>
+            </Link>
           </div>
 
           {/* Mobile Menu Trigger */}
@@ -98,8 +97,20 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div className="xl:hidden border-t-2 border-[#0A0A0A] bg-[#FFFFFF] px-4 pt-3 pb-6 animate-fadeIn">
           <div className="flex flex-col space-y-2 font-mono text-xs font-bold uppercase">
+            <Link
+              href="/install"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2.5 bg-[#FFF5F0] border-2 border-[#FF5A1F] text-[#FF5A1F] flex items-center justify-between font-black"
+            >
+              <span className="flex items-center gap-2">
+                <Sliders className="w-4 h-4" />
+                <span>CUSTOM INSTALLATION WIZARD</span>
+              </span>
+              <span>→</span>
+            </Link>
+
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
@@ -107,28 +118,18 @@ export const Navbar: React.FC = () => {
               >
                 <span>{link.label}</span>
                 <span className="text-xs text-[#FF5A1F]">→</span>
-              </a>
+              </Link>
             ))}
-            {siteConfig.documentationUrl && (
-              <a
-                href={siteConfig.documentationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 border-b border-[#0A0A0A]/10 hover:bg-[#F5F3EF] flex items-center justify-between text-[#0A0A0A]"
-              >
-                <span>Documentation</span>
-                <ArrowUpRight className="w-4 h-4 text-[#FF5A1F]" />
-              </a>
-            )}
+
             <div className="pt-4">
-              <a
-                href="#download"
+              <Link
+                href="/install"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full brutal-btn bg-[#FF5A1F] hover:bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] py-3 text-center text-xs font-black tracking-widest brutal-shadow"
+                className="w-full brutal-btn bg-[#FF5A1F] hover:bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] py-3 text-center text-xs font-black tracking-widest brutal-shadow flex items-center justify-center gap-2"
               >
-                GET GURUOS ↗
-              </a>
+                <span>LAUNCH INSTALLER WIZARD</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>

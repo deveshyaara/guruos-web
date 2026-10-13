@@ -106,6 +106,12 @@ export const Footer: React.FC = () => {
               </div>
               <ul className="space-y-2.5 text-[#FFFFFF]/80 uppercase">
                 <li>
+                  <a href="/install" className="text-[#FF5A1F] hover:text-[#FF9B42] font-bold flex items-center gap-1 transition-colors">
+                    <span>Install Planner</span>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
+                </li>
+                <li>
                   <a href="#installation" className="hover:text-[#FF5A1F] transition-colors">
                     Install Guide
                   </a>
@@ -152,6 +158,11 @@ export const Footer: React.FC = () => {
                 PROJECT
               </div>
               <ul className="space-y-2.5 text-[#FFFFFF]/80 uppercase">
+                <li>
+                  <a href="#status" className="hover:text-[#FF5A1F] transition-colors">
+                    Known Issues (1-5)
+                  </a>
+                </li>
                 {siteConfig.githubRepoUrl ? (
                   <li>
                     <a
@@ -188,11 +199,8 @@ export const Footer: React.FC = () => {
                 )}
                 <li>
                   <a href="#download" className="hover:text-[#FF5A1F] transition-colors">
-                    Checksums
+                    Checksums &amp; CI
                   </a>
-                </li>
-                <li>
-                  <span className="text-[#FFFFFF]/40">Open Source</span>
                 </li>
               </ul>
             </div>
@@ -207,10 +215,13 @@ export const Footer: React.FC = () => {
         {/* Bottom Metadata & Back to Top */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#FFFFFF]/70">
           
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="w-2 h-2 bg-[#FF5A1F]" />
             <span className="font-bold text-[#FFFFFF]">
-              GURUOS / AN INDEPENDENT ARCH LINUX PROJECT
+              GURUOS / ARCH LINUX EXPERIMENTAL
+            </span>
+            <span className="text-[#FF9B42] bg-[#1a1a1a] px-2 py-0.5 text-[10px] border border-[#FFFFFF]/10">
+              {siteConfig.releaseStatus}
             </span>
             <span className="text-[#FFFFFF]/40">© {currentYear}</span>
           </div>

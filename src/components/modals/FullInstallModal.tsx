@@ -287,13 +287,21 @@ export const FullInstallModal: React.FC<FullInstallModalProps> = ({
           <div className="font-mono text-[11px] text-[#0A0A0A]/60">
             {"// DOCUMENTATION DRAFT: VALIDATED AGAINST ARCH 2026 ROADMAP"}
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="brutal-btn bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] px-6 py-2.5 text-xs font-bold uppercase tracking-wider"
-          >
-            CLOSE GUIDE
-          </button>
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <a
+              href="/install"
+              className="brutal-btn bg-[#FF5A1F] hover:bg-[#FF9B42] text-[#0A0A0A] border-2 border-[#0A0A0A] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-center"
+            >
+              LAUNCH INTERACTIVE PLANNER ↗
+            </a>
+            <button
+              type="button"
+              onClick={onClose}
+              className="brutal-btn bg-[#0A0A0A] text-[#FFFFFF] border-2 border-[#0A0A0A] px-6 py-2.5 text-xs font-bold uppercase tracking-wider cursor-pointer"
+            >
+              CLOSE GUIDE
+            </button>
+          </div>
         </div>
 
       </div>
